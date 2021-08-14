@@ -152,6 +152,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-game-memorycard" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/14/game-memorycard/">翻卡片游戏</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/14/game-memorycard/" class="archive-article-date">
+  	<time datetime="2021-08-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="翻卡片游戏"><a href="#翻卡片游戏" class="headerlink" title="翻卡片游戏"></a>翻卡片游戏</h1><p>needtodo</p>
+<ol>
+<li>卡片的位置是随机的<br>因此 html 的 render 在 js 里完成<br>两种方法 1. 随机产生 id，然后根据 id 将整个 array 进行 sort 2. 随机 sort 整个 array，然后再 render 的时候赋予每个 img 按顺序的 id<br>自定义属性 data-id</li>
+<li>逻辑判断<ol>
+<li>通过 id 是否相同，判断是否是点击了同一个</li>
+<li>通过 id 对应 item 的 name 是否相同，判断是否是完成了一对儿</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//   对imgs进行随机排序</span></span><br><span class="line">imgs.sort(<span class="function">() =&gt;</span> <span class="number">0.5</span> - <span class="built_in">Math</span>.random());</span><br><span class="line"><span class="built_in">console</span>.log(imgs);</span><br><span class="line"><span class="comment">// render original dom tree 全是背面</span></span><br><span class="line"><span class="keyword">var</span> result = <span class="built_in">document</span>.querySelector(<span class="string">&quot;#result&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> grid = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.grid&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> loop = <span class="number">0</span>;</span><br><span class="line">imgs.forEach(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// console.log(grid);</span></span><br><span class="line">  <span class="keyword">let</span> addin = <span class="built_in">document</span>.createElement(<span class="string">&quot;img&quot;</span>);</span><br><span class="line">  addin.setAttribute(<span class="string">&quot;data-id&quot;</span>, loop++);</span><br><span class="line">  addin.src = <span class="string">&quot;images/blank.png&quot;</span>;</span><br><span class="line">  addin.addEventListener(<span class="string">&quot;click&quot;</span>, clickhandler);</span><br><span class="line">  grid.appendChild(addin);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> answer = [];</span><br><span class="line"><span class="keyword">var</span> correctnum = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clickhandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> num = <span class="built_in">this</span>.getAttribute(<span class="string">&quot;data-id&quot;</span>);</span><br><span class="line">  <span class="comment">// 存入id用于判断是否相同，存入img用于判断是否答案正确</span></span><br><span class="line">  <span class="comment">// 阻止快速点击</span></span><br><span class="line">  <span class="keyword">if</span> (answer.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.src = imgs[num].img;</span><br><span class="line">    answer.push(&#123; <span class="attr">num</span>: num, <span class="attr">pic</span>: imgs[num] &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (answer.length === <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> an1 = answer[<span class="number">0</span>];</span><br><span class="line">      <span class="keyword">let</span> an2 = answer[<span class="number">1</span>];</span><br><span class="line">      <span class="built_in">console</span>.log(answer);</span><br><span class="line">      grid.children[an1.num].src = an1.pic.img;</span><br><span class="line">      grid.children[an2.num].src = an2.pic.img;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        mathhandler(an1, an2);</span><br><span class="line">      &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mathhandler</span>(<span class="params">an1, an2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(an1);</span><br><span class="line">  <span class="built_in">console</span>.log(an2);</span><br><span class="line">  <span class="keyword">if</span> (an1.num === an2.num) &#123;</span><br><span class="line">    <span class="comment">// console.log(grid.children[an1.num]);</span></span><br><span class="line">    grid.children[an1.num].src = <span class="string">&quot;images/blank.png&quot;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (an1.pic.name === an2.pic.name) &#123;</span><br><span class="line">    correctnum++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (correctnum === (<span class="number">1</span> / <span class="number">2</span>) * imgs.length) &#123;</span><br><span class="line">      result.innerHTML = <span class="string">&quot;congrats&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result.innerHTML = correctnum;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    grid.children[an1.num].src = <span class="string">&quot;images/blank.png&quot;</span>;</span><br><span class="line">    grid.children[an2.num].src = <span class="string">&quot;images/blank.png&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  answer = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/14/game-memorycard/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-js30-10" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
