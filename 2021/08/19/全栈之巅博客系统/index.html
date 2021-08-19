@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: js20 之10date: 2021-08-18tags:单页面app前端路由 数据结构分析接口分析 待办事项列表api: &#x2F;todo&#x2F;list (get)  新增待办事项api: &#x2F;todo&#x2F;addTodo (post)  单个待办事项查询api: &#x2F;todo&#x2F;listId (get) ， params : {id : xxx} &#x2F;&#x2F;传 id  修改 待办事项标题，删除，锁定待办事">
+  <meta name="description" content="title: 全栈之巅博客系统date: 2021-08-19tags: 简单的博客管理系统vue +vuerouter+ node express + axios + mogodb没有 vuex【昨天那个用到 vuex 了，更复杂】 涉及了：【同步异步】async await【跨域】 cors 引入 模板设计 用 element 提供的样例修改一下 给 menu 添加属性in menu attr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/2021/08/18/vue_todolist/index.html">
+<meta property="og:url" content="http://example.com/2021/08/19/%E5%85%A8%E6%A0%88%E4%B9%8B%E5%B7%85%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title: js20 之10date: 2021-08-18tags:单页面app前端路由 数据结构分析接口分析 待办事项列表api: &#x2F;todo&#x2F;list (get)  新增待办事项api: &#x2F;todo&#x2F;addTodo (post)  单个待办事项查询api: &#x2F;todo&#x2F;listId (get) ， params : {id : xxx} &#x2F;&#x2F;传 id  修改 待办事项标题，删除，锁定待办事">
+<meta property="og:description" content="title: 全栈之巅博客系统date: 2021-08-19tags: 简单的博客管理系统vue +vuerouter+ node express + axios + mogodb没有 vuex【昨天那个用到 vuex 了，更复杂】 涉及了：【同步异步】async await【跨域】 cors 引入 模板设计 用 element 提供的样例修改一下 给 menu 添加属性in menu attr">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-18T13:56:10.715Z">
-<meta property="article:modified_time" content="2021-08-18T13:57:10.227Z">
+<meta property="article:published_time" content="2021-08-19T08:45:27.689Z">
+<meta property="article:modified_time" content="2021-08-19T08:45:58.473Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,125 +154,33 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-vue_todolist" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-全栈之巅博客系统" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: js20 之10<br>date: 2021-08-18<br>tags:<br>单页面app<br>前端路由</p>
-<h1 id="数据结构分析"><a href="#数据结构分析" class="headerlink" title="数据结构分析"></a>数据结构分析</h1><h1 id="接口分析"><a href="#接口分析" class="headerlink" title="接口分析"></a>接口分析</h1><ol>
-<li><p>待办事项列表<br>api: /todo/list (get)</p>
-</li>
-<li><p>新增待办事项<br>api: /todo/addTodo (post)</p>
-</li>
-<li><p>单个待办事项查询<br>api: /todo/listId (get) ， params : {id : xxx} //传 id</p>
-</li>
-<li><p>修改 待办事项标题，删除，锁定待办事项<br>api: /todo/editTodo (post) ，<br>params: {<br>id: String,<br> titie: String,<br>isDelete: Boolean,<br>locked: Boolean<br>}</p>
-</li>
-<li><p>新增 待办单项<br>api: /todo/addRecord (post)</p>
-</li>
-<li><p>修改,删除，完成待办单项<br>api: /todo/editRecord (post)<br>params: {<br>text: String,<br>isDelete: Boolean,<br>checked: Boolean<br>}</p>
-</li>
+        <p>title: 全栈之巅博客系统<br>date: 2021-08-19<br>tags:</p>
+<p>简单的博客管理系统<br>vue +vuerouter+ node express + axios + mogodb<br>没有 vuex<br>【昨天那个用到 vuex 了，更复杂】</p>
+<p>涉及了：<br>【同步异步】async await<br>【跨域】 cors 引入</p>
+<h1 id="模板设计"><a href="#模板设计" class="headerlink" title="模板设计"></a>模板设计</h1><ol>
+<li>用 element 提供的样例修改一下</li>
+<li>给 menu 添加属性<br>in menu attribue：<br>==router：==<br>是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 boolean — false<br>这样就可以给 menuitem 加路由<br>in menu item attribute：<br>index 唯一标志 string — —</li>
+<li>因此右侧要放 routerview</li>
+<li>在 articlelist 里，用 form 提交表单</li>
 </ol>
-<h1 id="组件分析"><a href="#组件分析" class="headerlink" title="组件分析"></a>组件分析</h1><p>接入型？一个容器组件,它里面包含了其他的组件，它本身只承担一个布局容器的作用，比如说 basin 的管理系统的右侧 mainbody<br>展示型？能接收数据，展示出来，但是无法与用用户进行交互<br>交互型？比如各类加强版的表单组件，通常强调复用</p>
-<p>分析得到：<br>app.vue // 最外层根组件 接入型<br>layouts.vue // 布局组件 接入型 接入其他组件<br>todos.vue // 左侧列表 交互型组件<br>lists.vue // 右侧内容 交互型组件<br>item.vue // 待办单项组件 交互型组件</p>
-<h1 id="style-》less"><a href="#style-》less" class="headerlink" title="style-》less"></a>style-》less</h1><h1 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h1><ol>
-<li>layouts.vue<ol>
-<li>进阶：控制 menu 是否收缩，是靠 vuex 的 menuOpen 进行类绑定</li>
-</ol>
-</li>
-<li>menus.vue<ol>
-<li>把 menus 作为 components 引入到 layouts 里</li>
-<li>menus 里，v-for 渲染 a 标签，包括 icon 和 text，count</li>
-<li>样式： 由 vuex 传来的 todolist 数据，进行 class 绑定</li>
-</ol>
-</li>
-<li>todo.vue<br>layouts 的右侧内容，由上面的 header 部分和下面的 list 部分组成</li>
-<li>item.vue 待办单项组件<br>todo 的子组件，给 item 的 props 传参，显示交互<br>这儿 v-for 用 index 不知道行不行</li>
-</ol>
-<h1 id="mock-axios"><a href="#mock-axios" class="headerlink" title="mock + axios"></a>mock + axios</h1><p>mockjs:<br><a target="_blank" rel="noopener" href="http://mockjs.com/examples.html">http://mockjs.com/examples.html</a><br>axios:<br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008470355">https://segmentfault.com/a/1190000008470355</a></p>
-<h2 id="利用-mockjs-模拟-2-个接口，一个菜单列表数据，一个新增菜单"><a href="#利用-mockjs-模拟-2-个接口，一个菜单列表数据，一个新增菜单" class="headerlink" title="利用 mockjs 模拟 2 个接口，一个菜单列表数据，一个新增菜单"></a>利用 mockjs 模拟 2 个接口，一个菜单列表数据，一个新增菜单</h2><p>关系是这样的：<br>mockjs 模拟服务端，通过组件配置两个 axios 请求路径，返回设计的数据<br>indexjs 用于方便外部调用 mockjs<br>apijs 包装 axios 请求方法，get/post<br>在组件（比如 menusvue 里）调用 apijs 的方法就可以请求到 mock 生成的随机数据了</p>
-<h3 id="menu-里的-mock-数据"><a href="#menu-里的-mock-数据" class="headerlink" title="menu 里的 mock 数据"></a>menu 里的 mock 数据</h3><ol>
-<li>src/mock/data/todoList.js 里放模拟数据</li>
-<li>src/mock/mock.js 模拟 ajax 请求的接口, 生成并返回模拟数据<br>使用 mockadapter， promise 模拟异步请求阻塞</li>
-<li>src/mock/index.js 暴露接口，方便导出（自动在找到 index）</li>
-<li>在 mainjs 里引入 mock</li>
-<li>src/api/api.js 里封装一个使用 axios 的 api 接口，通过调用函数名直接实现 get/post 请求，不用写很长配参</li>
-<li>调用接口<ol>
-<li>src/components/menus.vue 里 ，引入 apijs，<br>在 created 生命周期函数里调用 api.js 的方法，get/post 请求发出</li>
-</ol>
-</li>
-</ol>
-<h3 id="todo-里的-mock-数据"><a href="#todo-里的-mock-数据" class="headerlink" title="todo 里的 mock 数据"></a>todo 里的 mock 数据</h3><ol>
-<li>mockjs 里，思路同上，也是分为新增 item 和查找 item</li>
-<li>在 apijs 里添加 api 接口</li>
-</ol>
-<h1 id="menu"><a href="#menu" class="headerlink" title="menu"></a>menu</h1><h2 id="menu-嵌套路由"><a href="#menu-嵌套路由" class="headerlink" title="menu 嵌套路由"></a>menu 嵌套路由</h2><p><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/essentials/nested-routes.html">https://router.vuejs.org/zh/guide/essentials/nested-routes.html</a><br>匹配成功渲染到外面路由的 routerview 下</p>
-<h2 id="watch-监听-menu-里的-todoId，跳转路由"><a href="#watch-监听-menu-里的-todoId，跳转路由" class="headerlink" title="watch 监听 menu 里的 todoId，跳转路由"></a>watch 监听 menu 里的 todoId，跳转路由</h2><p>编程式导航<br><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/essentials/navigation.html">https://router.vuejs.org/zh/guide/essentials/navigation.html</a><br>$vm-nextTick:<br><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#vm-nextTick">https://cn.vuejs.org/v2/api/#vm-nextTick</a></p>
-<h2 id="menu-过程"><a href="#menu-过程" class="headerlink" title="menu 过程"></a>menu 过程</h2><ol>
-<li>点击时，触发事件改变 todoid，watch 监听到后跳转 router，这样右侧 list 会渲染成对应的 data</li>
-<li>新增时，调用 api 封装的 post—add 请求，返回 data 后，在 dom 更新后(见 vm-nextTick)，获得新的 todoList，触发 1 的 watch，更新右侧界面</li>
-<li>computed：计算属性 todoList，通过 vuex 的 getters 获得数据 todolist</li>
-<li>created： 在生命周期函数 created 里自动获得第一个 item 的 id，初始化右侧界面</li>
-</ol>
-<h1 id="todovue"><a href="#todovue" class="headerlink" title="todovue"></a>todovue</h1><p>todo 嵌套 item<br>todovue 由三部分组成</p>
+<h1 id="src-里建立-server-文件夹放后端代码"><a href="#src-里建立-server-文件夹放后端代码" class="headerlink" title="src 里建立 server 文件夹放后端代码"></a>src 里建立 server 文件夹放后端代码</h1><p>因为很简单所以 mongodb 和 express 写到一起</p>
 <ol>
-<li>上面的 header，主要显示</li>
-<li>中间的 input 和 其右侧的 btn</li>
-<li>下面的 todolist，v-for 循环渲染 item 子组件，并且向子组件传参</li>
-<li>监听路由变化，因为<ol>
-<li>增加删除修改都会调用 api 接口改变路由，监听到路由变化后 init，重新获得数据 data，data 改变，dom 改变，重新渲染 dom</li>
-<li>如果左侧点击了 menu，也会改变路由，也需要 refresh</li>
+<li>安装 【后端】express mongoss cors(跨域后端 3001 前端 8080)</li>
+<li>配置 express，见之前的 note，注意 async await</li>
+<li>启动：<ol>
+<li>npm run serve 启动前端</li>
+<li>nodemon(node 自动刷新工具)index.js 启动后端</li>
 </ol>
 </li>
+<li>安装【前端】axios，定义$HTTP 挂载在顶层 vue 的原型链上，整个项目都可以通过它来向后端发起 axios 请求</li>
 </ol>
-<h2 id="todovue-调用查询接口"><a href="#todovue-调用查询接口" class="headerlink" title="todovue 调用查询接口"></a>todovue 调用查询接口</h2><ol>
-<li>watch 方法监听路由对象属性<code>this.$route.params.id</code>，判断是否点击了左侧的 menu，从而导致右侧 list 是否要刷新数据(定义 method:init()-&gt;api)<br><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/api/#%E8%B7%AF%E7%94%B1%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7">https://router.vuejs.org/zh/api/#%E8%B7%AF%E7%94%B1%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7</a></li>
-<li>created 里也调用 init()</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">记得先判断有没有</span><br><span class="line"> todo ? todo.count = todo ? todo.record.filter((data) =&gt; &#123;</span><br><span class="line">        return data.checked === false;</span><br><span class="line">      &#125;).length : null : false;</span><br></pre></td></tr></table></figure>
-
-<h2 id="todovue-调用添加接口"><a href="#todovue-调用添加接口" class="headerlink" title="todovue 调用添加接口"></a>todovue 调用添加接口</h2><ol>
-<li>enter 绑定 method</li>
-<li>method 调用 api 传参，返回一个 promise， 写 then…</li>
-</ol>
-<h1 id="item"><a href="#item" class="headerlink" title="item"></a>item</h1><p>子组件，由父组件传入 item（内容），id，init(),locked<br>依需求绑定 style class ，<br>事件绑定后，当调用 api 修改完 mock 数据后，调用 init() 方法刷新</p>
-<h1 id="vuex-共享数据"><a href="#vuex-共享数据" class="headerlink" title="vuex 共享数据"></a>vuex 共享数据</h1><p>需要整个 app 共享数据完成点击，缩放等功能<br>vuex 共享的数据是：<br>todoList: [], //指我们的待办事项列表数据<br>menuOpen: false //移动端的时候菜单是否开启【移动端响应式】</p>
-<ol>
-<li><p>src/vuex/store.js 创建 vuex 实例，<br> 完成 src/vuex/getters.js， 获得 todolist</p>
-</li>
-<li><p>==actions.js==<br> 获得 mock 数据，调用修改 menuopen 方法</p>
-<ol>
-<li>commit 的对象解构：<br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022018995">https://segmentfault.com/a/1190000022018995</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8c3599dda094">https://www.jianshu.com/p/8c3599dda094</a></li>
-<li>actions 处理异步流程<br><a target="_blank" rel="noopener" href="https://vuex.vuejs.org/zh/guide/actions.html">https://vuex.vuejs.org/zh/guide/actions.html</a></li>
-</ol>
-</li>
-<li><p> mainjs 里引入 store</p>
-</li>
-</ol>
-<p>==关注==</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getTodo = <span class="function">(<span class="params">&#123;</span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="regexp">//</span>定义一个名字为getTodo的事件</span></span></span><br><span class="line"><span class="params"><span class="function">  commit,</span></span></span><br><span class="line"><span class="params"><span class="function">&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *调用 getTodo这个函数的时候</span></span><br><span class="line"><span class="comment">     会调用getTodoList这个ajax请求函数，</span></span><br><span class="line"><span class="comment">     函数返回值后，在调用store.js里面的EDITTODE方法，并且把值传给它。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    getTodoList().then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;EDITTODE&quot;</span>, res.data.todos);</span><br><span class="line">      resolve();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="引入-vuex-后-修改样式"><a href="#引入-vuex-后-修改样式" class="headerlink" title="引入 vuex 后 修改样式"></a>引入 vuex 后 修改样式</h2><ol>
-<li>menu 的响应式布局：<br>click-》menu 收缩 or 扩展</li>
-<li>==修改 menus：==【needtolearn】<br>把原来用 api 接口的数据替换成 vuex 提供<ol>
-<li>新增 menu item</li>
-<li>menu item 的锁定删除<br>控制 isupdate(IN VUEX)</li>
-</ol>
-</li>
-<li>修改 todo<br>东西比较多<ol>
-<li>init()方法里：从 vuex 获得 menu item 的 id，然后到 api 接口里获得 mock 数据，<br>解构赋值后，赋值给 vue 实例的 data</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init() &#123;</span><br><span class="line">const ID = this.$route.params.id;</span><br><span class="line">getTodo(&#123; id: ID &#125;).then(res =&gt; &#123;</span><br><span class="line">let &#123; id, title, count, isDelete, locked, record</span><br><span class="line">&#125; = res.data.todo;</span><br><span class="line">this.items = record;</span><br><span class="line">this.todo = &#123;</span><br><span class="line">id: id,</span><br><span class="line">title: title,</span><br><span class="line">count: count,</span><br><span class="line">locked: locked,</span><br><span class="line">isDelete: isDelete</span><br><span class="line">&#125;;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>更新<br>==注意 this 的指向==<br>edittodo 返回 promise 对象，调用 then 方法，重新在原来的 this 里重新获得数据，vue 渲染新的 dom</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">updateTodo() &#123;</span><br><span class="line">let \_this = this;</span><br><span class="line">console.log(this.todo);</span><br><span class="line">editTodo(&#123;</span><br><span class="line">todo: this.todo,</span><br><span class="line">&#125;).then((data) =&gt; &#123;</span><br><span class="line">// \_this.init();</span><br><span class="line">\_this.$store.dispatch(&quot;getTodo&quot;);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="server-index-js-服务端【express-mongodb】"><a href="#server-index-js-服务端【express-mongodb】" class="headerlink" title="server/index.js 服务端【express + mongodb】"></a>server/index.js 服务端【express + mongodb】</h2><p>get:查<br>post：增<br>delete：删（id 匹配）<br>edit：新增 vue 组件，在 list 页面点击修改时跳转到新的 url<br>put：修改，覆盖型</p>
+<h1 id="url-注意"><a href="#url-注意" class="headerlink" title="url 注意"></a>url 注意</h1><p>注意请求/访问的都是什么地址<br>index.Js 是后端接口的 url 服务器接口地址<br>前端的 router/index.js 是 前端页面的地址<br>前端 router 跳转到对应的 vue 组件里，调用$httP 发起请求(getpostdeleteput)后，获得返回的 promise 对象，.then 进一步处理<br>后端 server 监听到请求后，调用 mogodb 方法做数据库 CRUD，异步返回状态/数据</p>
 
       
 
@@ -352,7 +260,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/18/vue_todolist/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/19/%E5%85%A8%E6%A0%88%E4%B9%8B%E5%B7%85%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -367,7 +275,7 @@
 <nav id="article-nav">
   
   
-    <a href="/2021/08/16/grid%E4%BB%BF%E7%AB%99%E4%B9%8B%E4%BA%8C/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/08/18/mockjs%E7%9A%84todolist/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
