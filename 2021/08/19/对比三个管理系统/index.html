@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 全栈之巅博客系统date: 2021-08-19tags: 简单的博客管理系统vue +vuerouter+ node express + axios + mogodb没有 vuex【昨天那个用到 vuex 了，更复杂】 涉及了：【同步异步】async await【跨域】 cors 引入 模板设计 用 element 提供的样例修改一下 给 menu 添加属性in menu attr">
+  <meta name="description" content="被删的简单的管理系统这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里 当数据改变时，只改变了页面的全局 data，没有真正 CRUD 为什么代码这么多？ 一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长 二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里 亮点？ \1. menu 的组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/2021/08/19/%E5%85%A8%E6%A0%88%E4%B9%8B%E5%B7%85%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:url" content="http://example.com/2021/08/19/%E5%AF%B9%E6%AF%94%E4%B8%89%E4%B8%AA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title: 全栈之巅博客系统date: 2021-08-19tags: 简单的博客管理系统vue +vuerouter+ node express + axios + mogodb没有 vuex【昨天那个用到 vuex 了，更复杂】 涉及了：【同步异步】async await【跨域】 cors 引入 模板设计 用 element 提供的样例修改一下 给 menu 添加属性in menu attr">
+<meta property="og:description" content="被删的简单的管理系统这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里 当数据改变时，只改变了页面的全局 data，没有真正 CRUD 为什么代码这么多？ 一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长 二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里 亮点？ \1. menu 的组">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-19T08:45:27.689Z">
-<meta property="article:modified_time" content="2021-08-19T08:45:58.473Z">
+<meta property="article:published_time" content="2021-08-19T14:29:52.098Z">
+<meta property="article:modified_time" content="2021-08-19T14:34:12.837Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,33 +154,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-全栈之巅博客系统" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-对比三个管理系统" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: 全栈之巅博客系统<br>date: 2021-08-19<br>tags:</p>
-<p>简单的博客管理系统<br>vue +vuerouter+ node express + axios + mogodb<br>没有 vuex<br>【昨天那个用到 vuex 了，更复杂】</p>
-<p>涉及了：<br>【同步异步】async await<br>【跨域】 cors 引入</p>
-<h1 id="模板设计"><a href="#模板设计" class="headerlink" title="模板设计"></a>模板设计</h1><ol>
-<li>用 element 提供的样例修改一下</li>
-<li>给 menu 添加属性<br>in menu attribue：<br>==router：==<br>是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 boolean — false<br>这样就可以给 menuitem 加路由<br>in menu item attribute：<br>index 唯一标志 string — —</li>
-<li>因此右侧要放 routerview</li>
-<li>在 articlelist 里，用 form 提交表单</li>
-</ol>
-<h1 id="src-里建立-server-文件夹放后端代码"><a href="#src-里建立-server-文件夹放后端代码" class="headerlink" title="src 里建立 server 文件夹放后端代码"></a>src 里建立 server 文件夹放后端代码</h1><p>因为很简单所以 mongodb 和 express 写到一起</p>
-<ol>
-<li>安装 【后端】express mongoss cors(跨域后端 3001 前端 8080)</li>
-<li>配置 express，见之前的 note，注意 async await</li>
-<li>启动：<ol>
-<li>npm run serve 启动前端</li>
-<li>nodemon(node 自动刷新工具)index.js 启动后端</li>
-</ol>
-</li>
-<li>安装【前端】axios，定义$HTTP 挂载在顶层 vue 的原型链上，整个项目都可以通过它来向后端发起 axios 请求</li>
-</ol>
-<h2 id="server-index-js-服务端【express-mongodb】"><a href="#server-index-js-服务端【express-mongodb】" class="headerlink" title="server/index.js 服务端【express + mongodb】"></a>server/index.js 服务端【express + mongodb】</h2><p>get:查<br>post：增<br>delete：删（id 匹配）<br>edit：新增 vue 组件，在 list 页面点击修改时跳转到新的 url<br>put：修改，覆盖型</p>
-<h1 id="url-注意"><a href="#url-注意" class="headerlink" title="url 注意"></a>url 注意</h1><p>注意请求/访问的都是什么地址<br>index.Js 是后端接口的 url 服务器接口地址<br>前端的 router/index.js 是 前端页面的地址<br>前端 router 跳转到对应的 vue 组件里，调用$httP 发起请求(getpostdeleteput)后，获得返回的 promise 对象，.then 进一步处理<br>后端 server 监听到请求后，调用 mogodb 方法做数据库 CRUD，异步返回状态/数据</p>
+        <h1 id="被删的简单的管理系统"><a href="#被删的简单的管理系统" class="headerlink" title="被删的简单的管理系统"></a>被删的简单的管理系统</h1><p>这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里</p>
+<p>当数据改变时，只改变了页面的全局 data，没有真正 CRUD</p>
+<p>为什么代码这么多？</p>
+<p>一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长</p>
+<p>二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里</p>
+<p>亮点？</p>
+<p>\1. menu 的组件复用性强</p>
+<p>\2. 路由守卫</p>
+<h1 id="vue-todo"><a href="#vue-todo" class="headerlink" title="vue-todo"></a>vue-todo</h1><p>npm包：mockjs+axios-》mockaxios ，vuex ，vue-router</p>
+<p>\1. axios 请求封装成 api，调用函数，不直接调用 axios 的 get/post</p>
+<p>\2. menu 跳转更完善：监听点击，在 watch 跳转路由</p>
+<p>\3. 为什么服务端代码多？因为自己写的 CRUD，又调用 promise 模仿异步阻塞，没有像第三个用 mongoess 方法</p>
+<p>\4. 由于右侧设计的组件分离，有父子组件传参的知识</p>
+<p>\5. 【！】当 menu 点击时，会改变 route， 由于 route/：id 是 layout 的子组件，layout 右侧会渲染对应的 todo.vue</p>
+<p>\6. 对于每个 todovue，初始化到 vuex 里获得 id 对应的 itemlist，把 id 对应的 list 内容加载到 vue 组件里，绑定事件调用 api 增删改查后重新到 vuex 里获得数据，加载进 vue 组件里。并没有因为 id 不同，就跳转组件</p>
+<p>  为什么多？路由没有跳转，CRUD 都是在一个 vue 的 methods 里实现的（特别是修改）。而第三个是通过跳转路由-》新的 vue 组件-》实现的</p>
+<p>亮点：</p>
+<p>\1. 多个功能需要 vuex 引入，第三个没有 vuex</p>
+<p>\2. 封装 api 做 axios 请求</p>
+<p>\3. 页面交互效果好</p>
+<h1 id="简单的博客后台"><a href="#简单的博客后台" class="headerlink" title="简单的博客后台"></a>简单的博客后台</h1><p>vue +vuerouter+ node express + axios + mogodb<br>没有 vuex，真后台</p>
+<p>menu写死的</p>
+<p>右侧数据修改通过路由跳转多组件（给add和edit分别涉及新的vue组件）+后台交互实现的</p>
+<p>样式/复用/稳健性不如上面的好</p>
+<p>但是应该是最合理的</p>
 
       
 
@@ -260,7 +263,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/19/%E5%85%A8%E6%A0%88%E4%B9%8B%E5%B7%85%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/19/%E5%AF%B9%E6%AF%94%E4%B8%89%E4%B8%AA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -274,17 +277,8 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/08/19/%E8%A2%AB%E5%88%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/08/18/mockjs%E7%9A%84todolist%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/08/19/%E8%A2%AB%E5%88%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>

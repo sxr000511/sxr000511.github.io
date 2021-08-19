@@ -152,6 +152,187 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-对比三个管理系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="被删的简单的管理系统"><a href="#被删的简单的管理系统" class="headerlink" title="被删的简单的管理系统"></a>被删的简单的管理系统</h1><p>这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里</p>
+<p>当数据改变时，只改变了页面的全局 data，没有真正 CRUD</p>
+<p>为什么代码这么多？</p>
+<p>一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长</p>
+<p>二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里</p>
+<p>亮点？</p>
+<p>\1. menu 的组件复用性强</p>
+<p>\2. 路由守卫</p>
+<h1 id="vue-todo"><a href="#vue-todo" class="headerlink" title="vue-todo"></a>vue-todo</h1><p>npm包：mockjs+axios-》mockaxios ，vuex ，vue-router</p>
+<p>\1. axios 请求封装成 api，调用函数，不直接调用 axios 的 get/post</p>
+<p>\2. menu 跳转更完善：监听点击，在 watch 跳转路由</p>
+<p>\3. 为什么服务端代码多？因为自己写的 CRUD，又调用 promise 模仿异步阻塞，没有像第三个用 mongoess 方法</p>
+<p>\4. 由于右侧设计的组件分离，有父子组件传参的知识</p>
+<p>\5. 【！】当 menu 点击时，会改变 route， 由于 route/：id 是 layout 的子组件，layout 右侧会渲染对应的 todo.vue</p>
+<p>\6. 对于每个 todovue，初始化到 vuex 里获得 id 对应的 itemlist，把 id 对应的 list 内容加载到 vue 组件里，绑定事件调用 api 增删改查后重新到 vuex 里获得数据，加载进 vue 组件里。并没有因为 id 不同，就跳转组件</p>
+<p>  为什么多？路由没有跳转，CRUD 都是在一个 vue 的 methods 里实现的（特别是修改）。而第三个是通过跳转路由-》新的 vue 组件-》实现的</p>
+<p>亮点：</p>
+<p>\1. 多个功能需要 vuex 引入，第三个没有 vuex</p>
+<p>\2. 封装 api 做 axios 请求</p>
+<p>\3. 页面交互效果好</p>
+<h1 id="简单的博客后台"><a href="#简单的博客后台" class="headerlink" title="简单的博客后台"></a>简单的博客后台</h1><p>vue +vuerouter+ node express + axios + mogodb<br>没有 vuex，真后台</p>
+<p>menu写死的</p>
+<p>右侧数据修改通过路由跳转多组件（给add和edit分别涉及新的vue组件）+后台交互实现的</p>
+<p>样式/复用/稳健性不如上面的好</p>
+<p>但是应该是最合理的</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/19/%E5%AF%B9%E6%AF%94%E4%B8%89%E4%B8%AA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-被删管理系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里<br>当数据改变时，只改变了页面的全局 data，没有真正 CRUD<br>为什么代码这么多？<br>一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长<br>二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里<br>亮点？</p>
+<ol>
+<li><p>menu 的组件复用性强</p>
+</li>
+<li><p>路由守卫</p>
+</li>
+<li><p>数据 utils.js -》 globalData.js</p>
+</li>
+<li><p>路由配置 main.js<br>添加路由守卫，保证进入 login</p>
+</li>
+<li><p>Login.vue<br>添加表单校验，调用 elementui 的校验方法，保存 login 的 name，参考<a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/form">https://element.eleme.cn/#/zh-CN/component/form</a></p>
+</li>
+<li><p>【home.vue】主页面-》contains Menu.vue + 路由页面<br>整体页面用 element 的页面布局容器，参见<a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/container">https://element.eleme.cn/#/zh-CN/component/container</a><br>主页面，左侧调用 menu.vue，菜单组件，右侧由 header 和 routerview 组成，header 显示登陆状态，view 用来渲染子路由<br>当点击左侧 menu，右侧 mainbody 跳转到子路由显示</p>
+</li>
+<li><p>menu.vue<br>非常好的地方：<br>考虑到渲染菜单时是否是只有一个父菜单，v-if v-for velse 渲染，配合 routerlink，移植性好，<br>element 需要 id 绑定菜单，然而 datalist 本身并不需要 id<br>因此在 data 输入时，用 map 方法同时给每个父菜单和其下子菜单绑定符合 elementui 的 id</p>
+</li>
+<li><p>product 本身只是一个容器，东西都在 list 和 edit 里，<br>list 自身可以完成展示，上下移动，删除，新增/修改需要 router 里 push 进 edit/add，<br>并且 list 里面方法 edit / add 调用的是同一个 productedit<br>跳转到 productedit 组件对应的子路由 add 或者 edit 后，<br>productedit 根据 url 获得 id，如果有 id，到 data.JS 里获得对应数据，绑定到 form 上，用来修改，如果没有 id，则是新增</p>
+</li>
+<li><p>service 是一个整体组件，可以认为 service 是 product 的合体版，在 service 里，可以通过弹窗直接修改（因为没 route），如果在 product 里，就是跳转到 product 下的子路由<br>如何直接通过弹窗？<br>设计一个 form，其 visible 属性绑定到 dialogFormVisible，当编辑的 btn 点击时，修改 dialogFormVisible 为 true，传参，dialog 显示，<br>非常好的地方：<br>多选功能是在点击删除后出现的，没有用自带的 type==selection，（这样是默认出现多选 checkbox），</p>
+</li>
+</ol>
+<h1 id="1-设计数据结构"><a href="#1-设计数据结构" class="headerlink" title="1. 设计数据结构"></a>1. 设计数据结构</h1><h2 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h2><h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>列表增删查改需要一个 id 作为唯一标记</p>
+<h1 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h1><p>新增、删除、上移、下移<br>移动：splice 方法<code>arrayObject.splice(index,howmany,item1,.....,itemX)</code><br>第一个不上移，最后一个不下移</p>
+<h1 id="3-element-ui"><a href="#3-element-ui" class="headerlink" title="3.element-ui"></a>3.element-ui</h1><h2 id="NavMenu-导航菜单"><a href="#NavMenu-导航菜单" class="headerlink" title="NavMenu 导航菜单"></a>NavMenu 导航菜单</h2><ol>
+<li>侧栏菜单<br><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/menu#ce-lan">https://element.eleme.cn/#/zh-CN/component/menu#ce-lan</a><br>注意 active 的 index 是 string</li>
+<li>当有 submenu 时，每个 submenu 用 routerlink 生成，为了路由跳转<br>无 submenu 时，routerlink 到 el-menu 父元素上</li>
+<li>自动给 data 里的数据添加 index，符合 elementui 要求的 index：<br>模板运算符，…扩展运算符，map 方法，默认参数</li>
+</ol>
+<h2 id="Table-表格"><a href="#Table-表格" class="headerlink" title="Table 表格"></a>Table 表格</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/table">https://element.eleme.cn/#/zh-CN/component/table</a><br> 当 el-table 元素中注入 data 对象数组后，在 el-table-column 中用 prop 属性来对应对象中的键名即可填入数据，用 label 属性来定义表格的列名。可以使用 width 属性来定义列宽。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> menus = [</span><br><span class="line">  ...</span><br><span class="line">].map(<span class="function">(<span class="params">x, i</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 添加 index，可用于默认展开 default-openeds 属性，和激活状态 efault-active 属性的设置</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    ...x,</span><br><span class="line">    <span class="comment">// 子菜单就拼接$&#123;父菜单index&#125;-$&#123;子菜单index&#125;</span></span><br><span class="line">    <span class="attr">subMenus</span>: (x.subMenus || []).map(<span class="function">(<span class="params">y, j</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; ...y, <span class="attr">index</span>: <span class="string">`<span class="subst">$&#123;i&#125;</span>-<span class="subst">$&#123;j&#125;</span>`</span> &#125;;</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// 父菜单就把 index 加上好了</span></span><br><span class="line">    <span class="attr">index</span>: <span class="string">`<span class="subst">$&#123;i&#125;</span>`</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>结合组件 button</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table-column label=&quot;操作&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">      &lt;el-button</span><br><span class="line">        size=&quot;mini&quot;</span><br><span class="line">        @click=&quot;handleEdit(scope.$index, scope.row)&quot;&gt;编辑&lt;/el-button&gt;</span><br><span class="line">      &lt;el-button</span><br><span class="line">        size=&quot;mini&quot;</span><br><span class="line">        type=&quot;danger&quot;</span><br><span class="line">        @click=&quot;handleDelete(scope.$index, scope.row)&quot;&gt;删除&lt;/el-button&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">  &lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="表单-Element-Form-Element-Dialog"><a href="#表单-Element-Form-Element-Dialog" class="headerlink" title="表单 Element-Form + Element-Dialog"></a>表单 Element-Form + Element-Dialog</h3><p>用来添加数据，dialog</p>
+<ol>
+<li>form<br><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/form#form-item-methods">https://element.eleme.cn/#/zh-CN/component/form#form-item-methods</a></li>
+<li>dialog<br><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/dialog">https://element.eleme.cn/#/zh-CN/component/dialog</a></li>
+</ol>
+<h1 id="页面和路由"><a href="#页面和路由" class="headerlink" title="页面和路由"></a>页面和路由</h1><p>页面是特殊的组件，路由和页面路径是一一对应的，所以我们需要先设计应用的页面逻辑。<br>几种常用的管理端页面类型</p>
+<ol>
+<li>登录页 只有用户名和密码的输入</li>
+<li>列表 + 表单 单页可以完成某类服务的增删查改</li>
+<li>列表页 只有列表展示，提供查和删服务，需要配合 4 的表单页完成增和改</li>
+<li>表单页 只有表单编辑内容，可提供新增、修改等能力给 3 使用</li>
+</ol>
+<p>注意路由嵌套关系<br>service 服务信息，包括 列表左侧，和弹出的表单<br>product 产品信息，是 table 展示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/login                     /home                     /home/service</span><br><span class="line">+------------------+       +-----------------+       +-----------------+</span><br><span class="line">| App              |       | App             |       | App             |</span><br><span class="line">| +--------------+ |       | +-------------+ |       | +-------------+ |</span><br><span class="line">| | Login        | |       | | Home        | |       | | Home        | |</span><br><span class="line">| |              | |       | |             | |       | | +---------+ | |</span><br><span class="line">| |              | |  +--) | |&lt;router-view&gt;| |  +--) | | | Service | | |</span><br><span class="line">| |              | |       | |  无对应内容  | |       | | |列表+表单 | | |</span><br><span class="line">| |              | |       | |             | |       | | +---------+ | |</span><br><span class="line">| +--------------+ |       | +-------------+ |       | +-------------+ |</span><br><span class="line">+------------------+       +-----------------+       +-----------------+</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      /home/product                /home/product/list              /home/product/edit</span><br><span class="line">      +---------------------+      +------------------------+      +------------------------+</span><br><span class="line">      | App                 |      | App                    |      | App                    |</span><br><span class="line">      | +-----------------+ |      | +--------------------+ |      | +--------------------+ |</span><br><span class="line">      | | Home            | |      | | Home               | |      | | Home               | |</span><br><span class="line">      | | +-------------+ | |      | | +----------------+ | |      | | +----------------+ | |</span><br><span class="line"> +--) | | | Product     | | | +--) | | | Product        | | | +--) | | | Product        | | |</span><br><span class="line">      | | |&lt;router-view&gt;| | |      | | | +------------+ | | |      | | | +------------+ | | |</span><br><span class="line">      | | |  无对应内容  | | |      | | | | ProductList| | | |      | | | | ProductEdit| | | |</span><br><span class="line">      | | |             | | |      | | | | 单列表页    | | | |      | | | | 单表单页    | | | |</span><br><span class="line">      | | |             | | |      | | | +------------+ | | |      | | | +------------+ | | |</span><br><span class="line">      | | +-------------+ | |      | | +----------------+ | |      | | +----------------+ | |</span><br><span class="line">      | +-----------------+ |      | +--------------------+ |      | +--------------------+ |</span><br><span class="line">      +---------------------+      +------------------------+      +------------------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>router-view 渲染</li>
+<li>router-link 跳转(element 结合) 或者 this.$router.push</li>
+<li>路由 watch<br><el-menu>的配置得：<br>default-active 属性需要设置当前激活菜单的 index，因此我们需要监控$route 的变化，并根据路由情况调整绑定的激活 index。<br>先在第一级菜单里找，再在一级里面找<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> watch: &#123;</span><br><span class="line">// 为了设置 el-menu 的 default-active 属性，需要获取到路由状态</span><br><span class="line">$route(to) &#123;</span><br><span class="line">  // 对路由变化作出响应...</span><br><span class="line">  let activeIndex;</span><br><span class="line">  // 找到匹配的 routerName</span><br><span class="line">  this.menus.forEach(x =&gt; &#123;</span><br><span class="line">    if (x.routerName === to.name) &#123;</span><br><span class="line">      activeIndex = x.index;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      const subMenuItem = x.subMenus.find(y =&gt; y.routerName === to.name);</span><br><span class="line">      if (subMenuItem) &#123;</span><br><span class="line">        activeIndex = subMenuItem.index;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  // 并将 activeIndex 设置为对应的 菜单 index</span><br><span class="line">  if (activeIndex) &#123;</span><br><span class="line">    this.activeIndex = activeIndex;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="添加鉴权：只有登录了才能进入管理系统"><a href="#添加鉴权：只有登录了才能进入管理系统" class="headerlink" title="添加鉴权：只有登录了才能进入管理系统"></a>添加鉴权：只有登录了才能进入管理系统</h1><h2 id="1-先不用-vuex，globalData-js-作为全局数据库"><a href="#1-先不用-vuex，globalData-js-作为全局数据库" class="headerlink" title="1. 先不用 vuex，globalData.js 作为全局数据库"></a>1. 先不用 vuex，globalData.js 作为全局数据库</h2><p>还没有存到 cookie/storage 里，会刷新丢失</p>
+<h2 id="2-login-vue"><a href="#2-login-vue" class="headerlink" title="2.login.vue"></a>2.login.vue</h2><p>校验成功后，<code> this.$router.push(&#123; name: &quot;Home&quot; &#125;);</code>进入 homevue 页面</p>
+<h2 id="mainjs-里守卫"><a href="#mainjs-里守卫" class="headerlink" title="mainjs 里守卫"></a>mainjs 里守卫</h2><p>vue-router 的 router.beforeEach 导航守卫：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach((to, from, next) =&gt; &#123;</span><br><span class="line">  if (to.name !== &quot;Login&quot;) &#123;</span><br><span class="line">    // 非 login 页面，检查是否登录</span><br><span class="line">    // 这里简单前端模拟是否填写了用户名，真实环境需要走后台登录，缓存到本地</span><br><span class="line">    if (!getGlobalData(&quot;username&quot;)) &#123;</span><br><span class="line">      next(&#123; name: &quot;Login&quot; &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  // 其他情况正常执行</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/19/%E8%A2%AB%E5%88%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-全栈之巅博客系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -221,7 +402,7 @@
 
 
   
-    <article id="post-mockjs的todolist" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mockjs的todolist项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
@@ -352,7 +533,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/18/mockjs%E7%9A%84todolist/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/08/18/mockjs%E7%9A%84todolist%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
         </p>
       
 

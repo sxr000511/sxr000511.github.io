@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 全栈之巅博客系统date: 2021-08-19tags: 简单的博客管理系统vue +vuerouter+ node express + axios + mogodb没有 vuex【昨天那个用到 vuex 了，更复杂】 涉及了：【同步异步】async await【跨域】 cors 引入 模板设计 用 element 提供的样例修改一下 给 menu 添加属性in menu attr">
+  <meta name="description" content="这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里当数据改变时，只改变了页面的全局 data，没有真正 CRUD为什么代码这么多？一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里亮点？  menu 的组件复用性强  路由守卫  数据 ut">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/2021/08/19/%E5%85%A8%E6%A0%88%E4%B9%8B%E5%B7%85%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:url" content="http://example.com/2021/08/19/%E8%A2%AB%E5%88%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title: 全栈之巅博客系统date: 2021-08-19tags: 简单的博客管理系统vue +vuerouter+ node express + axios + mogodb没有 vuex【昨天那个用到 vuex 了，更复杂】 涉及了：【同步异步】async await【跨域】 cors 引入 模板设计 用 element 提供的样例修改一下 给 menu 添加属性in menu attr">
+<meta property="og:description" content="这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里当数据改变时，只改变了页面的全局 data，没有真正 CRUD为什么代码这么多？一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里亮点？  menu 的组件复用性强  路由守卫  数据 ut">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-19T08:45:27.689Z">
-<meta property="article:modified_time" content="2021-08-19T08:45:58.473Z">
+<meta property="article:published_time" content="2021-08-19T13:18:16.472Z">
+<meta property="article:modified_time" content="2021-08-19T13:16:24.580Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,33 +154,73 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-全栈之巅博客系统" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-被删管理系统" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: 全栈之巅博客系统<br>date: 2021-08-19<br>tags:</p>
-<p>简单的博客管理系统<br>vue +vuerouter+ node express + axios + mogodb<br>没有 vuex<br>【昨天那个用到 vuex 了，更复杂】</p>
-<p>涉及了：<br>【同步异步】async await<br>【跨域】 cors 引入</p>
-<h1 id="模板设计"><a href="#模板设计" class="headerlink" title="模板设计"></a>模板设计</h1><ol>
-<li>用 element 提供的样例修改一下</li>
-<li>给 menu 添加属性<br>in menu attribue：<br>==router：==<br>是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 boolean — false<br>这样就可以给 menuitem 加路由<br>in menu item attribute：<br>index 唯一标志 string — —</li>
-<li>因此右侧要放 routerview</li>
-<li>在 articlelist 里，用 form 提交表单</li>
-</ol>
-<h1 id="src-里建立-server-文件夹放后端代码"><a href="#src-里建立-server-文件夹放后端代码" class="headerlink" title="src 里建立 server 文件夹放后端代码"></a>src 里建立 server 文件夹放后端代码</h1><p>因为很简单所以 mongodb 和 express 写到一起</p>
+        <p>这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里<br>当数据改变时，只改变了页面的全局 data，没有真正 CRUD<br>为什么代码这么多？<br>一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长<br>二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里<br>亮点？</p>
 <ol>
-<li>安装 【后端】express mongoss cors(跨域后端 3001 前端 8080)</li>
-<li>配置 express，见之前的 note，注意 async await</li>
-<li>启动：<ol>
-<li>npm run serve 启动前端</li>
-<li>nodemon(node 自动刷新工具)index.js 启动后端</li>
-</ol>
+<li><p>menu 的组件复用性强</p>
 </li>
-<li>安装【前端】axios，定义$HTTP 挂载在顶层 vue 的原型链上，整个项目都可以通过它来向后端发起 axios 请求</li>
+<li><p>路由守卫</p>
+</li>
+<li><p>数据 utils.js -》 globalData.js</p>
+</li>
+<li><p>路由配置 main.js<br>添加路由守卫，保证进入 login</p>
+</li>
+<li><p>Login.vue<br>添加表单校验，调用 elementui 的校验方法，保存 login 的 name，参考<a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/form">https://element.eleme.cn/#/zh-CN/component/form</a></p>
+</li>
+<li><p>【home.vue】主页面-》contains Menu.vue + 路由页面<br>整体页面用 element 的页面布局容器，参见<a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/container">https://element.eleme.cn/#/zh-CN/component/container</a><br>主页面，左侧调用 menu.vue，菜单组件，右侧由 header 和 routerview 组成，header 显示登陆状态，view 用来渲染子路由<br>当点击左侧 menu，右侧 mainbody 跳转到子路由显示</p>
+</li>
+<li><p>menu.vue<br>非常好的地方：<br>考虑到渲染菜单时是否是只有一个父菜单，v-if v-for velse 渲染，配合 routerlink，移植性好，<br>element 需要 id 绑定菜单，然而 datalist 本身并不需要 id<br>因此在 data 输入时，用 map 方法同时给每个父菜单和其下子菜单绑定符合 elementui 的 id</p>
+</li>
+<li><p>product 本身只是一个容器，东西都在 list 和 edit 里，<br>list 自身可以完成展示，上下移动，删除，新增/修改需要 router 里 push 进 edit/add，<br>并且 list 里面方法 edit / add 调用的是同一个 productedit<br>跳转到 productedit 组件对应的子路由 add 或者 edit 后，<br>productedit 根据 url 获得 id，如果有 id，到 data.JS 里获得对应数据，绑定到 form 上，用来修改，如果没有 id，则是新增</p>
+</li>
+<li><p>service 是一个整体组件，可以认为 service 是 product 的合体版，在 service 里，可以通过弹窗直接修改（因为没 route），如果在 product 里，就是跳转到 product 下的子路由<br>如何直接通过弹窗？<br>设计一个 form，其 visible 属性绑定到 dialogFormVisible，当编辑的 btn 点击时，修改 dialogFormVisible 为 true，传参，dialog 显示，<br>非常好的地方：<br>多选功能是在点击删除后出现的，没有用自带的 type==selection，（这样是默认出现多选 checkbox），</p>
+</li>
 </ol>
-<h2 id="server-index-js-服务端【express-mongodb】"><a href="#server-index-js-服务端【express-mongodb】" class="headerlink" title="server/index.js 服务端【express + mongodb】"></a>server/index.js 服务端【express + mongodb】</h2><p>get:查<br>post：增<br>delete：删（id 匹配）<br>edit：新增 vue 组件，在 list 页面点击修改时跳转到新的 url<br>put：修改，覆盖型</p>
-<h1 id="url-注意"><a href="#url-注意" class="headerlink" title="url 注意"></a>url 注意</h1><p>注意请求/访问的都是什么地址<br>index.Js 是后端接口的 url 服务器接口地址<br>前端的 router/index.js 是 前端页面的地址<br>前端 router 跳转到对应的 vue 组件里，调用$httP 发起请求(getpostdeleteput)后，获得返回的 promise 对象，.then 进一步处理<br>后端 server 监听到请求后，调用 mogodb 方法做数据库 CRUD，异步返回状态/数据</p>
+<h1 id="1-设计数据结构"><a href="#1-设计数据结构" class="headerlink" title="1. 设计数据结构"></a>1. 设计数据结构</h1><h2 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h2><h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>列表增删查改需要一个 id 作为唯一标记</p>
+<h1 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h1><p>新增、删除、上移、下移<br>移动：splice 方法<code>arrayObject.splice(index,howmany,item1,.....,itemX)</code><br>第一个不上移，最后一个不下移</p>
+<h1 id="3-element-ui"><a href="#3-element-ui" class="headerlink" title="3.element-ui"></a>3.element-ui</h1><h2 id="NavMenu-导航菜单"><a href="#NavMenu-导航菜单" class="headerlink" title="NavMenu 导航菜单"></a>NavMenu 导航菜单</h2><ol>
+<li>侧栏菜单<br><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/menu#ce-lan">https://element.eleme.cn/#/zh-CN/component/menu#ce-lan</a><br>注意 active 的 index 是 string</li>
+<li>当有 submenu 时，每个 submenu 用 routerlink 生成，为了路由跳转<br>无 submenu 时，routerlink 到 el-menu 父元素上</li>
+<li>自动给 data 里的数据添加 index，符合 elementui 要求的 index：<br>模板运算符，…扩展运算符，map 方法，默认参数</li>
+</ol>
+<h2 id="Table-表格"><a href="#Table-表格" class="headerlink" title="Table 表格"></a>Table 表格</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/table">https://element.eleme.cn/#/zh-CN/component/table</a><br> 当 el-table 元素中注入 data 对象数组后，在 el-table-column 中用 prop 属性来对应对象中的键名即可填入数据，用 label 属性来定义表格的列名。可以使用 width 属性来定义列宽。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> menus = [</span><br><span class="line">  ...</span><br><span class="line">].map(<span class="function">(<span class="params">x, i</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 添加 index，可用于默认展开 default-openeds 属性，和激活状态 efault-active 属性的设置</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    ...x,</span><br><span class="line">    <span class="comment">// 子菜单就拼接$&#123;父菜单index&#125;-$&#123;子菜单index&#125;</span></span><br><span class="line">    <span class="attr">subMenus</span>: (x.subMenus || []).map(<span class="function">(<span class="params">y, j</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; ...y, <span class="attr">index</span>: <span class="string">`<span class="subst">$&#123;i&#125;</span>-<span class="subst">$&#123;j&#125;</span>`</span> &#125;;</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// 父菜单就把 index 加上好了</span></span><br><span class="line">    <span class="attr">index</span>: <span class="string">`<span class="subst">$&#123;i&#125;</span>`</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>结合组件 button</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table-column label=&quot;操作&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">      &lt;el-button</span><br><span class="line">        size=&quot;mini&quot;</span><br><span class="line">        @click=&quot;handleEdit(scope.$index, scope.row)&quot;&gt;编辑&lt;/el-button&gt;</span><br><span class="line">      &lt;el-button</span><br><span class="line">        size=&quot;mini&quot;</span><br><span class="line">        type=&quot;danger&quot;</span><br><span class="line">        @click=&quot;handleDelete(scope.$index, scope.row)&quot;&gt;删除&lt;/el-button&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">  &lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="表单-Element-Form-Element-Dialog"><a href="#表单-Element-Form-Element-Dialog" class="headerlink" title="表单 Element-Form + Element-Dialog"></a>表单 Element-Form + Element-Dialog</h3><p>用来添加数据，dialog</p>
+<ol>
+<li>form<br><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/form#form-item-methods">https://element.eleme.cn/#/zh-CN/component/form#form-item-methods</a></li>
+<li>dialog<br><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/dialog">https://element.eleme.cn/#/zh-CN/component/dialog</a></li>
+</ol>
+<h1 id="页面和路由"><a href="#页面和路由" class="headerlink" title="页面和路由"></a>页面和路由</h1><p>页面是特殊的组件，路由和页面路径是一一对应的，所以我们需要先设计应用的页面逻辑。<br>几种常用的管理端页面类型</p>
+<ol>
+<li>登录页 只有用户名和密码的输入</li>
+<li>列表 + 表单 单页可以完成某类服务的增删查改</li>
+<li>列表页 只有列表展示，提供查和删服务，需要配合 4 的表单页完成增和改</li>
+<li>表单页 只有表单编辑内容，可提供新增、修改等能力给 3 使用</li>
+</ol>
+<p>注意路由嵌套关系<br>service 服务信息，包括 列表左侧，和弹出的表单<br>product 产品信息，是 table 展示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/login                     /home                     /home/service</span><br><span class="line">+------------------+       +-----------------+       +-----------------+</span><br><span class="line">| App              |       | App             |       | App             |</span><br><span class="line">| +--------------+ |       | +-------------+ |       | +-------------+ |</span><br><span class="line">| | Login        | |       | | Home        | |       | | Home        | |</span><br><span class="line">| |              | |       | |             | |       | | +---------+ | |</span><br><span class="line">| |              | |  +--) | |&lt;router-view&gt;| |  +--) | | | Service | | |</span><br><span class="line">| |              | |       | |  无对应内容  | |       | | |列表+表单 | | |</span><br><span class="line">| |              | |       | |             | |       | | +---------+ | |</span><br><span class="line">| +--------------+ |       | +-------------+ |       | +-------------+ |</span><br><span class="line">+------------------+       +-----------------+       +-----------------+</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      /home/product                /home/product/list              /home/product/edit</span><br><span class="line">      +---------------------+      +------------------------+      +------------------------+</span><br><span class="line">      | App                 |      | App                    |      | App                    |</span><br><span class="line">      | +-----------------+ |      | +--------------------+ |      | +--------------------+ |</span><br><span class="line">      | | Home            | |      | | Home               | |      | | Home               | |</span><br><span class="line">      | | +-------------+ | |      | | +----------------+ | |      | | +----------------+ | |</span><br><span class="line"> +--) | | | Product     | | | +--) | | | Product        | | | +--) | | | Product        | | |</span><br><span class="line">      | | |&lt;router-view&gt;| | |      | | | +------------+ | | |      | | | +------------+ | | |</span><br><span class="line">      | | |  无对应内容  | | |      | | | | ProductList| | | |      | | | | ProductEdit| | | |</span><br><span class="line">      | | |             | | |      | | | | 单列表页    | | | |      | | | | 单表单页    | | | |</span><br><span class="line">      | | |             | | |      | | | +------------+ | | |      | | | +------------+ | | |</span><br><span class="line">      | | +-------------+ | |      | | +----------------+ | |      | | +----------------+ | |</span><br><span class="line">      | +-----------------+ |      | +--------------------+ |      | +--------------------+ |</span><br><span class="line">      +---------------------+      +------------------------+      +------------------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>router-view 渲染</li>
+<li>router-link 跳转(element 结合) 或者 this.$router.push</li>
+<li>路由 watch<br><el-menu>的配置得：<br>default-active 属性需要设置当前激活菜单的 index，因此我们需要监控$route 的变化，并根据路由情况调整绑定的激活 index。<br>先在第一级菜单里找，再在一级里面找<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> watch: &#123;</span><br><span class="line">// 为了设置 el-menu 的 default-active 属性，需要获取到路由状态</span><br><span class="line">$route(to) &#123;</span><br><span class="line">  // 对路由变化作出响应...</span><br><span class="line">  let activeIndex;</span><br><span class="line">  // 找到匹配的 routerName</span><br><span class="line">  this.menus.forEach(x =&gt; &#123;</span><br><span class="line">    if (x.routerName === to.name) &#123;</span><br><span class="line">      activeIndex = x.index;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      const subMenuItem = x.subMenus.find(y =&gt; y.routerName === to.name);</span><br><span class="line">      if (subMenuItem) &#123;</span><br><span class="line">        activeIndex = subMenuItem.index;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  // 并将 activeIndex 设置为对应的 菜单 index</span><br><span class="line">  if (activeIndex) &#123;</span><br><span class="line">    this.activeIndex = activeIndex;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="添加鉴权：只有登录了才能进入管理系统"><a href="#添加鉴权：只有登录了才能进入管理系统" class="headerlink" title="添加鉴权：只有登录了才能进入管理系统"></a>添加鉴权：只有登录了才能进入管理系统</h1><h2 id="1-先不用-vuex，globalData-js-作为全局数据库"><a href="#1-先不用-vuex，globalData-js-作为全局数据库" class="headerlink" title="1. 先不用 vuex，globalData.js 作为全局数据库"></a>1. 先不用 vuex，globalData.js 作为全局数据库</h2><p>还没有存到 cookie/storage 里，会刷新丢失</p>
+<h2 id="2-login-vue"><a href="#2-login-vue" class="headerlink" title="2.login.vue"></a>2.login.vue</h2><p>校验成功后，<code> this.$router.push(&#123; name: &quot;Home&quot; &#125;);</code>进入 homevue 页面</p>
+<h2 id="mainjs-里守卫"><a href="#mainjs-里守卫" class="headerlink" title="mainjs 里守卫"></a>mainjs 里守卫</h2><p>vue-router 的 router.beforeEach 导航守卫：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach((to, from, next) =&gt; &#123;</span><br><span class="line">  if (to.name !== &quot;Login&quot;) &#123;</span><br><span class="line">    // 非 login 页面，检查是否登录</span><br><span class="line">    // 这里简单前端模拟是否填写了用户名，真实环境需要走后台登录，缓存到本地</span><br><span class="line">    if (!getGlobalData(&quot;username&quot;)) &#123;</span><br><span class="line">      next(&#123; name: &quot;Login&quot; &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  // 其他情况正常执行</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
       
 
@@ -260,7 +300,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/19/%E5%85%A8%E6%A0%88%E4%B9%8B%E5%B7%85%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/19/%E8%A2%AB%E5%88%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -274,7 +314,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/08/19/%E8%A2%AB%E5%88%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/08/19/%E5%AF%B9%E6%AF%94%E4%B8%89%E4%B8%AA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -284,7 +324,7 @@
     </a>
   
   
-    <a href="/2021/08/18/mockjs%E7%9A%84todolist%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/08/19/%E5%85%A8%E6%A0%88%E4%B9%8B%E5%B7%85%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
