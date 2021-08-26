@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="被删的简单的管理系统这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里 当数据改变时，只改变了页面的全局 data，没有真正 CRUD 为什么代码这么多？ 一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长 二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里 亮点？ \1. menu 的组">
+  <meta name="description" content="title: 复盘date: 2021-08-26tags: 展望同架构 个人blog 理解web 和 admin 做的事情： 前端(调用后端接口获得数据，前端写页面展示，设计页面样式) server做的事情：后端( mongo交互 ，提供接口&#x2F;符合前端的数据) 域名 和 iptest.xinransong.top 8.210.55.213&#x2F; 8.210.55.213&#x2F;admin  访问的时候 h">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/2021/08/19/%E5%AF%B9%E6%AF%94%E4%B8%89%E4%B8%AA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:url" content="http://example.com/2021/08/26/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E5%85%A8%E7%AB%99%E4%B9%8B%E5%B7%85%E5%A4%8D%E7%9B%98/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="被删的简单的管理系统这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里 当数据改变时，只改变了页面的全局 data，没有真正 CRUD 为什么代码这么多？ 一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长 二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里 亮点？ \1. menu 的组">
+<meta property="og:description" content="title: 复盘date: 2021-08-26tags: 展望同架构 个人blog 理解web 和 admin 做的事情： 前端(调用后端接口获得数据，前端写页面展示，设计页面样式) server做的事情：后端( mongo交互 ，提供接口&#x2F;符合前端的数据) 域名 和 iptest.xinransong.top 8.210.55.213&#x2F; 8.210.55.213&#x2F;admin  访问的时候 h">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-19T14:29:52.098Z">
-<meta property="article:modified_time" content="2021-08-19T14:34:12.837Z">
+<meta property="article:published_time" content="2021-08-25T23:49:12.010Z">
+<meta property="article:modified_time" content="2021-08-26T03:45:06.237Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,36 +154,199 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-对比三个管理系统" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-王者荣耀全站之巅复盘" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="被删的简单的管理系统"><a href="#被删的简单的管理系统" class="headerlink" title="被删的简单的管理系统"></a>被删的简单的管理系统</h1><p>这是一个纯前端完成了一半的管理系统，数据操作都是靠 vue 源码写的，而且数据是死的，放在 globaldata.js 里</p>
-<p>当数据改变时，只改变了页面的全局 data，没有真正 CRUD</p>
-<p>为什么代码这么多？</p>
-<p>一是因为他的列表渲染，采用了组件的思想，所以原本几行的代码变得很长</p>
-<p>二是因为他没有通过后端接口改变数据，而是直接把方法写在了 vue 组件里</p>
-<p>亮点？</p>
-<p>\1. menu 的组件复用性强</p>
-<p>\2. 路由守卫</p>
-<h1 id="vue-todo"><a href="#vue-todo" class="headerlink" title="vue-todo"></a>vue-todo</h1><p>npm包：mockjs+axios-》mockaxios ，vuex ，vue-router</p>
-<p>\1. axios 请求封装成 api，调用函数，不直接调用 axios 的 get/post</p>
-<p>\2. menu 跳转更完善：监听点击，在 watch 跳转路由</p>
-<p>\3. 为什么服务端代码多？因为自己写的 CRUD，又调用 promise 模仿异步阻塞，没有像第三个用 mongoess 方法</p>
-<p>\4. 由于右侧设计的组件分离，有父子组件传参的知识</p>
-<p>\5. 【！】当 menu 点击时，会改变 route， 由于 route/：id 是 layout 的子组件，layout 右侧会渲染对应的 todo.vue</p>
-<p>\6. 对于每个 todovue，初始化到 vuex 里获得 id 对应的 itemlist，把 id 对应的 list 内容加载到 vue 组件里，绑定事件调用 api 增删改查后重新到 vuex 里获得数据，加载进 vue 组件里。并没有因为 id 不同，就跳转组件</p>
-<p>  为什么多？路由没有跳转，CRUD 都是在一个 vue 的 methods 里实现的（特别是修改）。而第三个是通过跳转路由-》新的 vue 组件-》实现的</p>
-<p>亮点：</p>
-<p>\1. 多个功能需要 vuex 引入，第三个没有 vuex</p>
-<p>\2. 封装 api 做 axios 请求</p>
-<p>\3. 页面交互效果好</p>
-<h1 id="简单的博客后台"><a href="#简单的博客后台" class="headerlink" title="简单的博客后台"></a>简单的博客后台</h1><p>vue +vuerouter+ node express + axios + mogodb<br>没有 vuex，真后台</p>
-<p>menu写死的</p>
-<p>右侧数据修改通过路由跳转多组件（给add和edit分别涉及新的vue组件）+后台交互实现的</p>
-<p>样式/复用/稳健性不如上面的好</p>
-<p>但是应该是最合理的</p>
+        <p>title: 复盘<br>date: 2021-08-26<br>tags:</p>
+<h1 id="展望"><a href="#展望" class="headerlink" title="展望"></a>展望</h1><p>同架构 个人blog</p>
+<h1 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h1><p>web 和 admin 做的事情： 前端(调用后端接口获得数据，前端写页面展示，设计页面样式)</p>
+<p>server做的事情：后端( mongo交互 ，提供接口/符合前端的数据)</p>
+<h1 id="域名-和-ip"><a href="#域名-和-ip" class="headerlink" title="域名 和 ip"></a>域名 和 ip</h1><p>test.xinransong.top</p>
+<p>8.210.55.213/</p>
+<p>8.210.55.213/admin</p>
+<ol>
+<li>访问的时候 http协议【可以后续https】</li>
+<li>记得配置安全口80</li>
+</ol>
+<h1 id="项目部署"><a href="#项目部署" class="headerlink" title="项目部署"></a>项目部署</h1><p>阿里云，oss数据库，</p>
+<p>域名解析，安全口的配置</p>
+<p>服务器配置： 域名无法解析就先用ip地址访问</p>
+<p>pm2 启动( 注意状态：关闭？启动？重启？)</p>
+<p>​    代码push到github上，在服务器pull后一定要reload pm2</p>
+<p>nginx反向代理( nginx反向代理配置巨坑)</p>
+<h1 id="一些语法"><a href="#一些语法" class="headerlink" title="一些语法"></a>一些语法</h1><ol>
+<li><p>async await  与 promise 对比</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jeodeng/p/10663869.html">https://www.cnblogs.com/jeodeng/p/10663869.html</a></p>
+</li>
+</ol>
+<h1 id="admin"><a href="#admin" class="headerlink" title="admin"></a>admin</h1><h2 id="【main-js】-头部vue实例"><a href="#【main-js】-头部vue实例" class="headerlink" title="【main.js】 头部vue实例"></a>【main.js】 头部vue实例</h2><ol>
+<li><p>引用css，elementui</p>
+</li>
+<li><p>引用router</p>
+</li>
+<li><p>引用http</p>
+</li>
+<li><p>添加 ==【混入mixin】==，设置通用方法</p>
+<ol>
+<li><p> 获得baseurl</p>
+</li>
+<li><p>登陆权限验证token</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="【router】路由配置"><a href="#【router】路由配置" class="headerlink" title="【router】路由配置"></a>【router】路由配置</h2><ol>
+<li>配置views里的vue实例的父子路由关系</li>
+<li>添加路由守卫：检查是否登录，没登陆跳转到login</li>
+</ol>
+<h2 id="【http】"><a href="#【http】" class="headerlink" title="【http】"></a>【http】</h2><p>创建axios实例，发送axios请求。 -》 发送到 baseurl + /admin/api</p>
+<p>其中：axios请求的baseURL为：</p>
+<p> <code>baseURL: process.env.VUE_APP_API_URL || &quot;/admin/api&quot;,</code></p>
+<p>(本地时：请求地址是 ‘<a target="_blank" rel="noopener" href="http://localhost:3000/admin/api&#39;">http://localhost:3000/admin/api&#39;</a>*)</p>
+<p>拦截器：</p>
+<ol>
+<li>request ：添加authorization(即token)给后端接口验证</li>
+<li>response ： 分析error，判断是否要跳转到login</li>
+</ol>
+<h2 id="【-views】-存放vue实例"><a href="#【-views】-存放vue实例" class="headerlink" title="【/views】 存放vue实例"></a>【/views】 存放vue实例</h2><h3 id="页面父子关系："><a href="#页面父子关系：" class="headerlink" title="页面父子关系："></a>页面父子关系：</h3><ol>
+<li>app.vue 【顶部，只是一个routerview】</li>
+<li>log页面和main是平级关系<ol>
+<li>login.vue【登陆页面】 </li>
+<li>main.vue【各种功能页面的顶部页面(elementui样式管理页面)】<ol>
+<li>Category~~ ； Admin~~ 等等子功能页面</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="admin总结"><a href="#admin总结" class="headerlink" title="admin总结"></a>admin总结</h3><ol>
+<li>页面逻辑基本一致：<ol>
+<li>如果有上传动作，就要自定义上传方法，mixin身份验证，上传成功再次渲染</li>
+<li>edit 和 create公用vue，通过url的id 判断具体是什么功能</li>
+<li>created() 时先从后台拉取数据</li>
+</ol>
+</li>
+<li> $http -》 直接发起axios请求 ； router -》 路由页面跳转</li>
+</ol>
+<h1 id="server"><a href="#server" class="headerlink" title="server"></a>server</h1><h2 id="db-js"><a href="#db-js" class="headerlink" title="db.js"></a>db.js</h2><p>创建mongo数据库实例，并且把model全部引用一遍（防止后面找不到，报undefined错误）</p>
+<h2 id="router-admin-index-js"><a href="#router-admin-index-js" class="headerlink" title="router/admin/index.js"></a>router/admin/index.js</h2><p>管理端接口文件，是后端接口和数据库交互的具体代码</p>
+<ol>
+<li><p>app.use（） 设置传入的express实例：</p>
+<p>数据流向： app （头部）-》 中间件（权限验证，挂载模型） -》 router(与db交互)</p>
+<ol>
+<li>添加权限中间件，datamodel中间件</li>
+<li>关联子路由router</li>
+</ol>
+</li>
+<li><p>router  ： 完成数据库的 CRUD</p>
+<ol>
+<li><p>根据子路由，调用post put delete get 方法，直接与数据库交互</p>
+<p>交互完毕返回</p>
+</li>
+</ol>
+</li>
+<li><p> <em>app</em>.post（”/admin/api/upload”~~） 用于数据上传( 本地 or 云)，调用权限中间件</p>
+</li>
+<li><p> <em>app</em>.post(“/admin/api/login”~~~） 用于登录</p>
+</li>
+<li><p> brcypt</p>
+</li>
+<li><p>jwt -》 token生成</p>
+</li>
+<li><p>assert ：错误抛出</p>
+</li>
+</ol>
+<h2 id="router-web-index-js【mongo高级】"><a href="#router-web-index-js【mongo高级】" class="headerlink" title="router/web/index.js【mongo高级】"></a>router/web/index.js【mongo高级】</h2><p>由两部分组成：数据初始化( 随机爬下来的数据)， 后台数据库接口提供(get 方法)</p>
+<p>逻辑与admin相比更简单，数据处理更复杂</p>
+<ol>
+<li><p> 例： 数据初始化</p>
+</li>
+<li><ol>
+<li>==录入信息的神操作== -》》 mongodb 教程<br>由此每次访问 web/api/news/init 接口都会清空 article 表然后放入新随机的 article</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">    // 导入新闻数据</span><br><span class="line">router.get(&#x27;/news/init&#x27;, async (req, res) =&gt; &#123;</span><br><span class="line">  // 每次调用init接口都会清空article 插入随机的数据</span><br><span class="line">const parent = await Category.findOne(&#123;</span><br><span class="line">  name: &#x27;新闻分类&#x27;</span><br><span class="line">&#125;)</span><br><span class="line">//   获得新闻分类下的所有子分类</span><br><span class="line">const cats = await Category.find().where(&#123;</span><br><span class="line">  parent: parent</span><br><span class="line">&#125;).lean()</span><br><span class="line">//   数据</span><br><span class="line">const newsTitles = [&quot;夏日新版本“稷下星之队”即将6月上线&quot;,...&quot;]</span><br><span class="line">//  map方法处理数组news，给他们随机的两个分类</span><br><span class="line">const newsList = newsTitles.map(title =&gt; &#123;</span><br><span class="line">  //   sort 随机分类</span><br><span class="line">  const randomCats = cats.slice(0).sort((a, b) =&gt; Math.random() - 0.5)</span><br><span class="line">  return &#123;</span><br><span class="line">    categories: randomCats.slice(0, 2),</span><br><span class="line">    title: title</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">//   清空article</span><br><span class="line">await Article.deleteMany(&#123;&#125;)</span><br><span class="line">//   插入</span><br><span class="line">await Article.insertMany(newsList)</span><br><span class="line">res.send(newsList)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><ol start="2">
+<li>例： 数据接口<ol>
+<li>articlejs 模型里增添==虚拟字段==</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 虚拟字段newslist</span><br><span class="line">schema.virtual(&quot;newsList&quot;, &#123;</span><br><span class="line">localField: &quot;_id&quot;,</span><br><span class="line">foreignField: &quot;categories&quot;,</span><br><span class="line">justOne: false,</span><br><span class="line">ref: &quot;Article&quot;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>web/indexjs 中: 两次 polulate 关联<br> 先从 top 分类-》关联到子分类-》子分类下的 newslist(用虚拟外键)获得 articlelist</li>
+<li> 不好：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">router.get(&#x27;/news/list&#x27;, async (req, res) =&gt; &#123;</span><br><span class="line">// const parent = await Category.findOne(&#123;</span><br><span class="line">// name: &#x27;新闻分类&#x27;</span><br><span class="line">// &#125;).populate(&#123;</span><br><span class="line">// path: &#x27;children&#x27;,</span><br><span class="line">// populate: &#123;</span><br><span class="line">// path: &#x27;newsList&#x27;</span><br><span class="line">// &#125;</span><br><span class="line">// &#125;).lean()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>更好：</p>
+<ol>
+<li><p>mongo 聚合查询 aggregate，一次操作多次查询，具有管道（一次完成三个操作）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const cats = await Category.aggregate([</span><br><span class="line">  &lt;!--1.过滤 匹配 --&gt;</span><br><span class="line">&#123; $match: &#123; parent: parent._id &#125; &#125;,</span><br><span class="line">  &lt;!-- &#123; 2. 相当于join 左关联接，起个名字 newslist--&gt;</span><br><span class="line">    $lookup: &#123;</span><br><span class="line">      from: &#x27;articles&#x27;,</span><br><span class="line">      localField: &#x27;_id&#x27;,</span><br><span class="line">      foreignField: &#x27;categories&#x27;,</span><br><span class="line">      as: &#x27;newsList&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &lt;!-- 添加字段 -》3.  修改字段，只要5个--&gt;</span><br><span class="line">    $addFields: &#123;</span><br><span class="line">      newsList: &#123; $slice: [&#x27;$newsList&#x27;, 5] &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure></li>
+<li><p>增添：热门</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    //   只要_id ，返回v._id</span><br><span class="line">const subCats = cats.map(v =&gt; v._id)</span><br><span class="line">cats.unshift(&#123;</span><br><span class="line">  name: &#x27;热门&#x27;,</span><br><span class="line">  newsList: await Article.find().where(&#123;</span><br><span class="line">    categories: &#123; $in: subCats &#125;</span><br><span class="line">  &#125;).populate(&#x27;categories&#x27;).limit(5).lean()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 热门下的 article 要保存自己本来的 category</span><br><span class="line">// 其他的还是自己的 category</span><br><span class="line">// 三元运算符做判断</span><br><span class="line">cats.map(cat =&gt; &#123;</span><br><span class="line">cat.newsList.map(news =&gt; &#123;</span><br><span class="line">news.categoryName = (cat.name === &#x27;热门&#x27;)</span><br><span class="line">? news.categories[0].name : cat.name</span><br><span class="line">return news</span><br><span class="line">&#125;)</span><br><span class="line">return cat</span><br><span class="line">&#125;)</span><br><span class="line">res.send(cats)</span><br><span class="line"></span><br><span class="line">​```</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h2><p>顶部文件：创建express实例</p>
+<ol>
+<li>引用cors</li>
+<li>设置token 密钥</li>
+<li>静态文件托管<ol>
+<li>托管最开始的本地文件存储文件夹</li>
+<li>托管代码部署后的admin，web 静态文件夹</li>
+</ol>
+</li>
+<li>引用admin和web端的接口配置文件(各自的router/~/index)</li>
+<li>引用数据库</li>
+<li>监听端口3000</li>
+</ol>
+<h2 id="models"><a href="#models" class="headerlink" title="models"></a>models</h2><p>建立mongo模型，表关联查询，虚拟字段查询</p>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="mainjs"><a href="#mainjs" class="headerlink" title="mainjs"></a>mainjs</h2><p>头部文件</p>
+<ol>
+<li>引用组件 swiper ，card </li>
+<li>引用css样式(sass)</li>
+<li>引用axios，同admin端，挂载成为$http</li>
+</ol>
+<h2 id="router"><a href="#router" class="headerlink" title="router"></a>router</h2><p>根据页面样式设计路由关系</p>
+<ol>
+<li>头部main( 有header) 做入口框架【bar + nav +routerview】，home 是真正的主页<ol>
+<li>主页 home</li>
+<li>文章页 article</li>
+</ol>
+</li>
+<li> 英雄详细页( 无header)</li>
+</ol>
+<h2 id="views"><a href="#views" class="headerlink" title="views"></a>views</h2><h4 id="home【难点：card-cardlist】"><a href="#home【难点：card-cardlist】" class="headerlink" title="home【难点：card cardlist】"></a>home【难点：card cardlist】</h4><ol>
+<li><p>card : tittle + icon 来自传参<br>【card 构成了卡片布局最上面的 header】<br>【主体是一个 slot，会放入 listcard】</p>
+</li>
+<li><p>listcard：【文章预览部分，英雄预览部分】</p>
+<ol>
+<li><p> listcard 由 card 而来，是 card 的 slot</p>
+</li>
+<li><p>listcard 主要构成了卡片布局里的 tab 和下面的 swiper 组件</p>
+</li>
+<li><p>listcard swiper 里面的单条 category 由==作用域插槽==传回给 home【子传父】</p>
+</li>
+<li><p>父组件 home.vue 里：==【父组件可以决定子组件每一个循环体的 style】==</p>
+<ol>
+<li>listcard-》card 组件调用形成 head，自己形成 tab 和 slide</li>
+<li>【外部获得每个 category 循环 v-for 显示，一行一行的文字】</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">   &lt;m-list-card icon=&quot;category&quot; title=&quot;新闻资讯&quot; :categories=&quot;newsCats&quot;&gt;</span><br><span class="line">  &lt;!-- 作用域插槽 --&gt;</span><br><span class="line">  &lt;!-- 通过#获得子组件slot绑定的category --&gt;</span><br><span class="line">  &lt;template #items=&quot;&#123;category&#125;&quot;&gt;</span><br><span class="line">    &lt;router-link</span><br><span class="line">    tag=&quot;div&quot;</span><br><span class="line">    :to=&quot;`/articles/$&#123;news._id&#125;`&quot;</span><br><span class="line">    class=&quot;py-2 fs-lg d-flex&quot;</span><br><span class="line">    v-for=&quot;(news, i) in category.newsList&quot; :key=&quot;i&quot;&gt;</span><br><span class="line">      &lt;span class=&quot;text-info&quot;&gt;[&#123;&#123;news.categoryName&#125;&#125;]&lt;/span&gt;</span><br><span class="line">      &lt;span class=&quot;px-2&quot;&gt;|&lt;/span&gt;</span><br><span class="line">      &lt;span class=&quot;flex-1 text-dark-1 text-ellipsis pr-2&quot;&gt;&#123;&#123;news.title&#125;&#125;&lt;/span&gt;</span><br><span class="line">      &lt;span class=&quot;text-grey-1 fs-sm&quot;&gt;&#123;&#123;news.createdAt | date&#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;/router-link&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">&lt;/m-list-card&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2></li>
+</ol>
 
       
 
@@ -263,7 +426,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/19/%E5%AF%B9%E6%AF%94%E4%B8%89%E4%B8%AA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/26/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E5%85%A8%E7%AB%99%E4%B9%8B%E5%B7%85%E5%A4%8D%E7%9B%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -277,17 +440,8 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/08/26/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E5%85%A8%E7%AB%99%E4%B9%8B%E5%B7%85%E5%A4%8D%E7%9B%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/08/19/%E8%A2%AB%E5%88%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/08/19/%E5%AF%B9%E6%AF%94%E4%B8%89%E4%B8%AA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
