@@ -8,11 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="概括： categories  《—–》articles article ——-》 categorymongo里 数据有唯一的_id， 如果要在一个article数据里保存一个category， 正确的做法是保存他的_id ，查询时通过populate关联得到_id对应的category对象 category——》 articles如果想要通过一个category找到包含这个category的所有">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:url" content="http://example.com/2021/08/26/mongo%E5%8F%8C%E5%90%91%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="概括： categories  《—–》articles article ——-》 categorymongo里 数据有唯一的_id， 如果要在一个article数据里保存一个category， 正确的做法是保存他的_id ，查询时通过populate关联得到_id对应的category对象 category——》 articles如果想要通过一个category找到包含这个category的所有">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-26T08:02:37.469Z">
+<meta property="article:modified_time" content="2021-08-26T08:11:43.394Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -150,41 +154,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-游戏memorycard" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-mongo双向关联查询总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/14/%E6%B8%B8%E6%88%8Fmemorycard/">翻卡片游戏</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/14/%E6%B8%B8%E6%88%8Fmemorycard/" class="archive-article-date">
-  	<time datetime="2021-08-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-14</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="翻卡片游戏"><a href="#翻卡片游戏" class="headerlink" title="翻卡片游戏"></a>翻卡片游戏</h1><p>needtodo</p>
+        <p>概括：</p>
+<p>categories  《—–》articles</p>
+<h1 id="article-——-》-category"><a href="#article-——-》-category" class="headerlink" title="article ——-》 category"></a>article ——-》 category</h1><p>mongo里 数据有唯一的_id，</p>
+<p>如果要在一个article数据里保存一个category，</p>
+<p>正确的做法是保存他的_id ，查询时通过populate关联得到<code>_id</code>对应的category对象</p>
+<h1 id="category——》-articles"><a href="#category——》-articles" class="headerlink" title="category——》 articles"></a>category——》 articles</h1><p>如果想要通过一个category找到包含这个category的所有articles，要用虚拟字段(schema中定义)</p>
+<p>schema.virtual 参数：</p>
 <ol>
-<li>卡片的位置是随机的<br>因此 html 的 render 在 js 里完成<br>两种方法 1. 随机产生 id，然后根据 id 将整个 array 进行 sort 2. 随机 sort 整个 array，然后再 render 的时候赋予每个 img 按顺序的 id<br>自定义属性 data-id</li>
-<li>逻辑判断<ol>
-<li>通过 id 是否相同，判断是否是点击了同一个</li>
-<li>通过 id 对应 item 的 name 是否相同，判断是否是完成了一对儿</li>
+<li>localfield ：本地键  比如_id</li>
+<li>ref ：外部参考模型   比如articles</li>
+<li>foreignfield ：外部字段 </li>
+<li>justone</li>
 </ol>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//   对imgs进行随机排序</span></span><br><span class="line">imgs.sort(<span class="function">() =&gt;</span> <span class="number">0.5</span> - <span class="built_in">Math</span>.random());</span><br><span class="line"><span class="built_in">console</span>.log(imgs);</span><br><span class="line"><span class="comment">// render original dom tree 全是背面</span></span><br><span class="line"><span class="keyword">var</span> result = <span class="built_in">document</span>.querySelector(<span class="string">&quot;#result&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> grid = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.grid&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> loop = <span class="number">0</span>;</span><br><span class="line">imgs.forEach(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// console.log(grid);</span></span><br><span class="line">  <span class="keyword">let</span> addin = <span class="built_in">document</span>.createElement(<span class="string">&quot;img&quot;</span>);</span><br><span class="line">  addin.setAttribute(<span class="string">&quot;data-id&quot;</span>, loop++);</span><br><span class="line">  addin.src = <span class="string">&quot;images/blank.png&quot;</span>;</span><br><span class="line">  addin.addEventListener(<span class="string">&quot;click&quot;</span>, clickhandler);</span><br><span class="line">  grid.appendChild(addin);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> answer = [];</span><br><span class="line"><span class="keyword">var</span> correctnum = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clickhandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> num = <span class="built_in">this</span>.getAttribute(<span class="string">&quot;data-id&quot;</span>);</span><br><span class="line">  <span class="comment">// 存入id用于判断是否相同，存入img用于判断是否答案正确</span></span><br><span class="line">  <span class="comment">// 阻止快速点击</span></span><br><span class="line">  <span class="keyword">if</span> (answer.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.src = imgs[num].img;</span><br><span class="line">    answer.push(&#123; <span class="attr">num</span>: num, <span class="attr">pic</span>: imgs[num] &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (answer.length === <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> an1 = answer[<span class="number">0</span>];</span><br><span class="line">      <span class="keyword">let</span> an2 = answer[<span class="number">1</span>];</span><br><span class="line">      <span class="built_in">console</span>.log(answer);</span><br><span class="line">      grid.children[an1.num].src = an1.pic.img;</span><br><span class="line">      grid.children[an2.num].src = an2.pic.img;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        mathhandler(an1, an2);</span><br><span class="line">      &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mathhandler</span>(<span class="params">an1, an2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(an1);</span><br><span class="line">  <span class="built_in">console</span>.log(an2);</span><br><span class="line">  <span class="keyword">if</span> (an1.num === an2.num) &#123;</span><br><span class="line">    <span class="comment">// console.log(grid.children[an1.num]);</span></span><br><span class="line">    grid.children[an1.num].src = <span class="string">&quot;images/blank.png&quot;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (an1.pic.name === an2.pic.name) &#123;</span><br><span class="line">    correctnum++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (correctnum === (<span class="number">1</span> / <span class="number">2</span>) * imgs.length) &#123;</span><br><span class="line">      result.innerHTML = <span class="string">&quot;congrats&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result.innerHTML = correctnum;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    grid.children[an1.num].src = <span class="string">&quot;images/blank.png&quot;</span>;</span><br><span class="line">    grid.children[an2.num].src = <span class="string">&quot;images/blank.png&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  answer = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>默认不加虚拟字段返回</p>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -193,16 +205,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/14/%E6%B8%B8%E6%88%8Fmemorycard/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/26/mongo%E5%8F%8C%E5%90%91%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/08/26/%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81%E7%9A%84%E6%80%9D%E8%B7%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -222,92 +293,14 @@
 
 
 
-
-  
-    <article id="post-js30-10" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/13/js30-10/">js20 之10</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/13/js30-10/" class="archive-article-date">
-  	<time datetime="2021-08-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JS20-》》10"><a href="#JS20-》》10" class="headerlink" title="JS20-》》10"></a>JS20-》》10</h1><h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><p>一个简单的思路：事件委托+循环<br>事件委托就是把 click 事件绑定在最外面的 box 上，这样可以避免给许多个 li 添加监听事件<br>重点在于点击的逻辑处理<br>我们只考虑 click with crtl 的情况<br>比较简单的想法是： 1. 每次 click 都保存下来对应 li 标签的 index 2. 检测每次 click 是否 with cntrl，如果是，就将这两次 click 之间的 li 的 checked 属性赋值为 true，不在范围之内的 li 保持他们的 checked 3. 因为不知道两次 click 的 index 大小，所以设置两个区间</p>
-<p>知识点：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (event.target.parentNode === <span class="built_in">this</span>.children[i]) &#123;</span><br><span class="line">  newindex = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>event.target 是 checkbox，其 parentnode 是 li。<br>由于事件委托，this 是最外面的 box，this 的 children 是 li<br>使用===，获得 index</p>
-<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><p>css设计了常用的 li 样式</p>
-<ol>
-<li>表格 li 间分割线的处理<br>分割线用 border-left + border-bottom 设计<br>要注意最后一个 li 的 borderbottom 清空</li>
-<li>li 内部大小的处理<br>li contains checkbox + p<br>li 的高度由 checkbox 和 p 撑开<br>要注意的是，p 要设置 padding，否则 p 左侧的 border 只会和文字高度一致<br>另外，li 内部用 flex 布局</li>
-</ol>
-<hr>
-<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p>逻辑是：</p>
-<ol>
-<li>给每个 li 绑定 handler</li>
-<li>维护了一个 inbetween 属性用于选择</li>
-</ol>
-<p>每次点击，都一定会把改 li 保存下来（this-》lastchecked），<br>如果下次点击是 with cnrtl，就把（lastchecked 《-》this 之间的 li.checked = true）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleCheck</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Check if they had the shift key down</span></span><br><span class="line">  <span class="comment">// AND check that they are checking it</span></span><br><span class="line">  <span class="keyword">let</span> inBetween = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (e.shiftKey &amp;&amp; <span class="built_in">this</span>.checked) &#123;</span><br><span class="line">    <span class="comment">// go ahead and do what we please</span></span><br><span class="line">    <span class="comment">// loop over every single checkbox</span></span><br><span class="line">    checkboxes.forEach(<span class="function">(<span class="params">checkbox</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(checkbox);</span><br><span class="line">      <span class="keyword">if</span> (checkbox === <span class="built_in">this</span> || checkbox === lastChecked) &#123;</span><br><span class="line">        inBetween = !inBetween;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;Starting to check them in between!&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (inBetween) &#123;</span><br><span class="line">        checkbox.checked = <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  lastChecked = <span class="built_in">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/13/js30-10/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -330,8 +323,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
