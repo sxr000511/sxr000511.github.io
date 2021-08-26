@@ -152,6 +152,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-登录验证的思路" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>登录验证由两方面组成：</p>
+<ol>
+<li>客户端路由守卫( 没有登录信息不能进入其他页面)</li>
+<li>服务端身份匹配（生成），操作权限限制</li>
+</ol>
+<h1 id="server服务端"><a href="#server服务端" class="headerlink" title="server服务端"></a>server服务端</h1><h2 id="1-用户信息匹配"><a href="#1-用户信息匹配" class="headerlink" title="1. 用户信息匹配"></a>1. 用户信息匹配</h2><p>app: express实例</p>
+<p>post：post方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#123;&#125;解构赋值</span></span><br><span class="line"><span class="comment">// 调用assert包 抛出错误</span></span><br><span class="line">app.post(<span class="string">&quot;/admin/api/login&quot;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; username, password &#125; = req.body;</span><br><span class="line">  <span class="comment">// 1.根据用户名找用户</span></span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> AdminUser.findOne(&#123; username &#125;).select(<span class="string">&quot;+password&quot;</span>);</span><br><span class="line">  assert(user, <span class="number">422</span>, <span class="string">&quot;用户不存在&quot;</span>);</span><br><span class="line">  <span class="comment">// 2.校验密码</span></span><br><span class="line">  <span class="keyword">const</span> isValid = <span class="built_in">require</span>(<span class="string">&quot;bcryptjs&quot;</span>).compareSync(password, user.password);</span><br><span class="line">  assert(isValid, <span class="number">422</span>, <span class="string">&quot;密码错误&quot;</span>);</span><br><span class="line">  <span class="comment">// 3.返回token</span></span><br><span class="line">  <span class="keyword">const</span> token = jwt.sign(&#123; <span class="attr">id</span>: user._id &#125;, app.get(<span class="string">&quot;secret&quot;</span>));</span><br><span class="line">  res.send(&#123; token &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>从req.body里取出web传入的信息，解构赋值</li>
+<li>数据库查询用户信息，不存在则抛出422 </li>
+<li>bcrypt校验密码散列是否一致，不一致抛出422</li>
+<li>校验通过，jwt生成token(token的内容是用户的唯一<code>_id</code>)，返回token</li>
+</ol>
+<h2 id="2-用户信息生成model"><a href="#2-用户信息生成model" class="headerlink" title="2. 用户信息生成model"></a>2. 用户信息生成model</h2><p>定义mongo模型AdminUser，生成模型时，用set方法把传入的string类型的pswd散列后保存</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">&quot;mongoose&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> schema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">  <span class="attr">username</span>: &#123; <span class="attr">type</span>: <span class="built_in">String</span> &#125;,</span><br><span class="line">  <span class="attr">password</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="attr">select</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="function"><span class="title">set</span>(<span class="params">val</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&quot;bcryptjs&quot;</span>).hashSync(val, <span class="number">10</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = mongoose.model(<span class="string">&quot;AdminUser&quot;</span>, schema);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-权限控制中间件"><a href="#3-权限控制中间件" class="headerlink" title="3. 权限控制中间件"></a>3. 权限控制中间件</h2><p><code>const token = ~~~</code> 是从header里取出有用的token数据</p>
+<p>assert插件抛出错误</p>
+<ol>
+<li>如果token不存在，err 401</li>
+<li>如果token校验不通过，err401</li>
+<li>如果token对应的id不存在( 这里写作id实际上是_id),err 401</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> assert = <span class="built_in">require</span>(<span class="string">&quot;http-assert&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> jwt = <span class="built_in">require</span>(<span class="string">&quot;jsonwebtoken&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> AdminUser = <span class="built_in">require</span>(<span class="string">&quot;../models/AdminUser&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> (req, res, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> token = <span class="built_in">String</span>(req.headers.authorization || <span class="string">&quot;&quot;</span>)</span><br><span class="line">      .split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">      .pop();</span><br><span class="line">    assert(token, <span class="number">401</span>, <span class="string">&quot;请先登录&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> &#123; id &#125; = jwt.verify(token, req.app.get(<span class="string">&quot;secret&quot;</span>));</span><br><span class="line">    assert(id, <span class="number">401</span>, <span class="string">&quot;请先登录&quot;</span>);</span><br><span class="line">    req.user = <span class="keyword">await</span> AdminUser.findById(id);</span><br><span class="line">    assert(req.user, <span class="number">401</span>, <span class="string">&quot;请先登录&quot;</span>);</span><br><span class="line">    <span class="keyword">await</span> next();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="admin用户端"><a href="#admin用户端" class="headerlink" title="admin用户端"></a>admin用户端</h1><h2 id="1-error拦截器拦截"><a href="#1-error拦截器拦截" class="headerlink" title="1. error拦截器拦截"></a>1. error拦截器拦截</h2><p>http： axios实例</p>
+<p>如果response内有错误信息，弹出显示，</p>
+<p>如果错误码401，跳转到登录页面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// response拦截</span></span><br><span class="line">http.interceptors.response.use(</span><br><span class="line">  <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err.response.data.message) &#123;</span><br><span class="line">      <span class="comment">// 弹出错误-》elementui</span></span><br><span class="line">      Vue.prototype.$message(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&quot;error&quot;</span>,</span><br><span class="line">        <span class="attr">message</span>: err.response.data.message,</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (err.response.status === <span class="number">401</span>) &#123;</span><br><span class="line">        router.push(<span class="string">&quot;/login&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-在request里发送token"><a href="#2-在request里发送token" class="headerlink" title="2. 在request里发送token"></a>2. 在request里发送token</h2><p>request请求中添加拦截器，在每次请求时，如果本地由token，则在请求头header里添加<code>bearer字段 + token</code>,发送给服务端</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// request拦截</span></span><br><span class="line">http.interceptors.request.use(</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Do something before request is sent</span></span><br><span class="line">    <span class="comment">// console.log(localStorage.token);</span></span><br><span class="line">    <span class="comment">// 如果有token才获取</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">localStorage</span>.token) &#123;</span><br><span class="line">      config.headers.Authorization = <span class="string">&quot;Bearer &quot;</span> + <span class="built_in">localStorage</span>.token;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Do something with request error</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-路由守卫"><a href="#3-路由守卫" class="headerlink" title="3. 路由守卫"></a>3. 路由守卫</h2><p>login vue的meta为true，if条件判断的意思是：如果不是登陆页面且无token，跳转到login强制登陆</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// console.log(&quot;log&quot;);</span></span><br><span class="line">  <span class="keyword">if</span> (!to.meta.isPublic &amp;&amp; !<span class="built_in">localStorage</span>.token) &#123;</span><br><span class="line">    <span class="keyword">return</span> next(<span class="string">&quot;/login&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-登陆时在response里保存token"><a href="#4-登陆时在response里保存token" class="headerlink" title="4.登陆时在response里保存token"></a>4.登陆时在response里保存token</h2><p>token在res里，错误在拦截器里已经拦截</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">   <span class="keyword">async</span> <span class="function"><span class="title">login</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">     <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="built_in">this</span>.$http.post(<span class="string">&quot;login&quot;</span>, <span class="built_in">this</span>.model);</span><br><span class="line">     <span class="comment">//   得到返回的token，存到loalstorage里</span></span><br><span class="line">     <span class="comment">// sessionStorage.token = res.data.token</span></span><br><span class="line">     <span class="built_in">localStorage</span>.token = res.data.token;</span><br><span class="line">     <span class="built_in">this</span>.$router.push(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">     <span class="built_in">this</span>.$message(&#123;</span><br><span class="line">       <span class="attr">type</span>: <span class="string">&quot;success&quot;</span>,</span><br><span class="line">       <span class="attr">message</span>: <span class="string">&quot;登录成功&quot;</span>,</span><br><span class="line">     &#125;);</span><br><span class="line">   &#125;,</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/26/%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81%E7%9A%84%E6%80%9D%E8%B7%AF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-王者荣耀全站之巅复盘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1204,86 +1294,10 @@
 
 
   
-    <article id="post-js30-10" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/13/js30-10/">js20 之10</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/13/js30-10/" class="archive-article-date">
-  	<time datetime="2021-08-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JS20-》》10"><a href="#JS20-》》10" class="headerlink" title="JS20-》》10"></a>JS20-》》10</h1><h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><p>一个简单的思路：事件委托+循环<br>事件委托就是把 click 事件绑定在最外面的 box 上，这样可以避免给许多个 li 添加监听事件<br>重点在于点击的逻辑处理<br>我们只考虑 click with crtl 的情况<br>比较简单的想法是： 1. 每次 click 都保存下来对应 li 标签的 index 2. 检测每次 click 是否 with cntrl，如果是，就将这两次 click 之间的 li 的 checked 属性赋值为 true，不在范围之内的 li 保持他们的 checked 3. 因为不知道两次 click 的 index 大小，所以设置两个区间</p>
-<p>知识点：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (event.target.parentNode === <span class="built_in">this</span>.children[i]) &#123;</span><br><span class="line">  newindex = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>event.target 是 checkbox，其 parentnode 是 li。<br>由于事件委托，this 是最外面的 box，this 的 children 是 li<br>使用===，获得 index</p>
-<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><p>css设计了常用的 li 样式</p>
-<ol>
-<li>表格 li 间分割线的处理<br>分割线用 border-left + border-bottom 设计<br>要注意最后一个 li 的 borderbottom 清空</li>
-<li>li 内部大小的处理<br>li contains checkbox + p<br>li 的高度由 checkbox 和 p 撑开<br>要注意的是，p 要设置 padding，否则 p 左侧的 border 只会和文字高度一致<br>另外，li 内部用 flex 布局</li>
-</ol>
-<hr>
-<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p>逻辑是：</p>
-<ol>
-<li>给每个 li 绑定 handler</li>
-<li>维护了一个 inbetween 属性用于选择</li>
-</ol>
-<p>每次点击，都一定会把改 li 保存下来（this-》lastchecked），<br>如果下次点击是 with cnrtl，就把（lastchecked 《-》this 之间的 li.checked = true）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleCheck</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Check if they had the shift key down</span></span><br><span class="line">  <span class="comment">// AND check that they are checking it</span></span><br><span class="line">  <span class="keyword">let</span> inBetween = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span> (e.shiftKey &amp;&amp; <span class="built_in">this</span>.checked) &#123;</span><br><span class="line">    <span class="comment">// go ahead and do what we please</span></span><br><span class="line">    <span class="comment">// loop over every single checkbox</span></span><br><span class="line">    checkboxes.forEach(<span class="function">(<span class="params">checkbox</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(checkbox);</span><br><span class="line">      <span class="keyword">if</span> (checkbox === <span class="built_in">this</span> || checkbox === lastChecked) &#123;</span><br><span class="line">        inBetween = !inBetween;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;Starting to check them in between!&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (inBetween) &#123;</span><br><span class="line">        checkbox.checked = <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  lastChecked = <span class="built_in">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/13/js30-10/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
