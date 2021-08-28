@@ -152,6 +152,63 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-精灵图展开" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>【王者荣耀的精灵图 nav 部分】，在展开时显示数十个 icon，在关闭时只显示一排 icon</p>
+<ol>
+<li>实际上是由两组精灵图 icons 组成的</li>
+<li>第一组 icons 只有一行，固定宽高，overflow:hidden，inline-flex，使之只能显示一行元素</li>
+<li>第二组 icons nowrap，完整显示打开时的样式，position:relative， 当打开时 translateY 下来，覆盖住第一组 icon，当关闭时 translateY 上去，被隐藏</li>
+<li>打开关闭的时候 nav 的高度是改变的</li>
+<li>实现这个动画： 先设计好各自的样式，再在顶部 class，toggle 类名.open</li>
+<li>精灵图的制作：spritecow 网站</li>
+<li>精灵图移动端-》二倍图</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/28/%E7%B2%BE%E7%81%B5%E5%9B%BE%E5%B1%95%E5%BC%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-卡片组件的两种封装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1130,80 +1187,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/08/16/grid%E4%BB%BF%E7%AB%99%E4%B9%8B%E4%BA%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gird仿站之一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: grid1<br>date: 2021-08-15<br>tags:</p>
-<h1 id="仿写"><a href="#仿写" class="headerlink" title="仿写"></a>仿写</h1><h2 id="html-语义化"><a href="#html-语义化" class="headerlink" title="html 语义化"></a>html 语义化</h2><p>header section footer 等</p>
-<h2 id="grid-布局"><a href="#grid-布局" class="headerlink" title="grid 布局"></a>grid 布局</h2><p>Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是一维布局。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是二维布局。Grid 布局远比 Flex 布局强大。<br><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html">https://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html</a></p>
-<h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><p>整体 gird 布局，左边<br><img src="https://github.com/sxr000511/js_minidemo/blob/master/website_imitator/smart_official_website/note/aboutus.JPG?raw=true"></p>
-<ol>
-<li>宽度 100vw 视口占全部</li>
-<li>z-index -》200 使之最高</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">header &#123;</span><br><span class="line">  /* 占满整个浏览器宽度 */</span><br><span class="line">  width: 100vw;</span><br><span class="line">  height: 80px;</span><br><span class="line">  padding: 0 40px;</span><br><span class="line">  /* 栅格布局grid */</span><br><span class="line">  display: grid;</span><br><span class="line">  /* 左边列宽1 右边列宽2 */</span><br><span class="line">  grid-template-columns: 1fr 2fr;</span><br><span class="line">  /* 居中 */</span><br><span class="line">  align-content: center;</span><br><span class="line">  position: relative;</span><br><span class="line">  z-index: 200;</span><br><span class="line">&#125;</span><br><span class="line">header nav &#123;</span><br><span class="line">  /* 内容在单元格里靠end对齐 */</span><br><span class="line">  justify-self: end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="glide"><a href="#glide" class="headerlink" title="glide"></a>glide</h3><p>用插件 glide.js+anime.js</p>
-<h3 id="aboutus"><a href="#aboutus" class="headerlink" title="aboutus"></a>aboutus</h3><p><img src="https://github.com/sxr000511/js_minidemo/blob/master/website_imitator/smart_official_website/note/header.JPG?raw=true"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">* 关于我们 */</span><br><span class="line">/* 先给整个contentrapper设样式 */</span><br><span class="line">/* 内容区域 */</span><br><span class="line">/* 通用样式 */</span><br><span class="line">.content-wrapper &#123;</span><br><span class="line">  /* 一维排版 */</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  flex-direction: column;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">section &#123;</span><br><span class="line">  /* 二维 */</span><br><span class="line">  display: grid;</span><br><span class="line">  /* 每个列的对齐方式 */</span><br><span class="line">  justify-items: center;</span><br><span class="line">  max-width: 1280px;</span><br><span class="line">  padding: 0 80px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>红色短线用伪元素</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* 红色条：伪元素 */</span><br><span class="line">.title1::after &#123;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  display: block;</span><br><span class="line">  width: 80%;</span><br><span class="line">  height: 4px;</span><br><span class="line">  background-color: var(--primary-color);</span><br><span class="line">  margin-top: 14px;</span><br><span class="line">  /* 移动到中间，80-》右移10%，左右都10% */</span><br><span class="line">  transform: translateX(10%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://github.com/sxr000511/js_minidemo/blob/master/website_imitator/smart_official_website/note/feature.JPG?raw=true"><br>featues 是六个 feature 的集合<br>用 grid 分成六个 area<br>关注下分行分列的写法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.features &#123;</span><br><span class="line">  /* grid布局 */</span><br><span class="line">  display: grid;</span><br><span class="line">  /* 重复几次，重复的值  1fr：容器宽度的1/3*/</span><br><span class="line">  grid-template-columns: repeat(3, 1fr);</span><br><span class="line">  /* 两行 */</span><br><span class="line">  grid-template-rows: 126px 126px;</span><br><span class="line">  /* 列间空隙 */</span><br><span class="line">  column-gap: 5vw;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>feature 内部也是 grid 布局，分为 2 行 2 列<br>左侧整列用于 icon<br>右侧整列分上下用于标签 和 p</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/* 每一个业务 */</span><br><span class="line"></span><br><span class="line">.feature &#123;</span><br><span class="line">  /* grid */</span><br><span class="line">  display: grid;</span><br><span class="line">  /* gird-area布局 */</span><br><span class="line">  /* 自定义行列名字 */</span><br><span class="line">  grid-template-areas:</span><br><span class="line">    &quot;icon title&quot;</span><br><span class="line">    &quot;icon content&quot;;</span><br><span class="line">  /* 2列 */</span><br><span class="line">  grid-template-columns: 60px 1fr;</span><br><span class="line">  /* 2行 */</span><br><span class="line">  /* 1/4 -- 3/4 */</span><br><span class="line">  grid-template-rows: 1fr 3fr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>area 的引用：font-szie 可以控制 icon 的大小</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.feature i.fas &#123;</span><br><span class="line">  /* 图标 */</span><br><span class="line">  /* 引用，放在左上 */</span><br><span class="line">  grid-area: icon;</span><br><span class="line">  font-size: 34px;</span><br><span class="line">  color: var(--primary-color);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/15/gird%E4%BB%BF%E7%AB%99%E4%B9%8B%E4%B8%80/">展开全文 >></a>
         </p>
       
 
